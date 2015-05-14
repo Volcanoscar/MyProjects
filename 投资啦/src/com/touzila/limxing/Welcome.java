@@ -8,17 +8,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 
 public class Welcome extends Activity {
+	private HttpURLConnection conn;
 	private ImageView iv_welcome;
-	private SharedPreferences sp;
 	private Bitmap bitmap;
 
 	@Override
@@ -26,9 +28,7 @@ public class Welcome extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
 		iv_welcome = (ImageView) findViewById(R.id.iv_welcome);
-		sp = getSharedPreferences("welcome", MODE_PRIVATE);
-		getPicture();
-		goMainActivity();
+		// 判断应用缓存中是否含有Welcome图片，如果有则欢迎页使用这个，如果没有则使用app中assects中的照片
 		try {
 			File file = new File(this.getCacheDir(), "welcome.jpg");
 			if (file.isFile()) {
@@ -37,21 +37,29 @@ public class Welcome extends Activity {
 				bitmap = BitmapFactory.decodeStream(this.getAssets().open(
 						"psb.jpg"));
 			}
+			iv_welcome.setImageBitmap(bitmap);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		iv_welcome.setImageBitmap(bitmap);
+		// 如果是wifi联网则下载图片
+		if (!isWifi(this.getApplicationContext())) {
+			getPicture();
+		}
+		// 3秒后开启主页面
+		goMainActivity();
 	}
 
-	// 从服务器端下载欢迎页图片到缓存中的功能
+	/**
+	 * 从服务器端下载欢迎页图片到缓存中的功能
+	 */
 	public void getPicture() {
 		new Thread() {
 			public void run() {
 				try {
 					URL url = new URL(
-							"http://192.168.17.30:8080/psb/welcome.jpg");
-					HttpURLConnection conn = (HttpURLConnection) url
-							.openConnection();
+							"http://192.168.31.216:8080/psb/welcome.jpg");
+					conn = (HttpURLConnection) url.openConnection();
+					// 判断网络资源是否存在，否则不执行下载
 					if (conn.getResponseCode() == 200) {
 						InputStream input = conn.getInputStream();
 						Bitmap bitmap = BitmapFactory.decodeStream(input);
@@ -61,6 +69,8 @@ public class Welcome extends Activity {
 								new FileOutputStream(new File(Welcome.this
 										.getCacheDir(), "welcome.jpg")));
 						input.close();
+					} else {
+						return;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -75,7 +85,6 @@ public class Welcome extends Activity {
 	 */
 	public void goMainActivity() {
 		new Handler().postDelayed(new Runnable() {
-
 			@Override
 			public void run() {
 				Intent intent = new Intent(Welcome.this, MainActivity.class);
@@ -83,6 +92,22 @@ public class Welcome extends Activity {
 				Welcome.this.finish();
 			}
 		}, 3000);
+	}
 
+	/**
+	 * 判断是否是wifi联网
+	 * 
+	 * @param mContext
+	 * @return
+	 */
+	private static boolean isWifi(Context mContext) {
+		ConnectivityManager connectivityManager = (ConnectivityManager) mContext
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+		if (activeNetInfo != null
+				&& activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+			return true;
+		}
+		return false;
 	}
 }

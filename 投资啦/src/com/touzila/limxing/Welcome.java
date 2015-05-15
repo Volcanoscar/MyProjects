@@ -10,6 +10,7 @@ import java.net.URL;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -19,6 +20,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 
 public class Welcome extends Activity {
+	private SharedPreferences sp;
 	private HttpURLConnection conn;
 	private ImageView iv_welcome;
 	private Bitmap bitmap;
@@ -27,6 +29,7 @@ public class Welcome extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
+		sp = getSharedPreferences("info", MODE_PRIVATE);
 		iv_welcome = (ImageView) findViewById(R.id.iv_welcome);
 		// 判断应用缓存中是否含有Welcome图片，如果有则欢迎页使用这个，如果没有则使用app中assects中的照片
 		try {
@@ -45,8 +48,16 @@ public class Welcome extends Activity {
 		if (!isWifi(this.getApplicationContext())) {
 			getPicture();
 		}
-		// 3秒后开启主页面
-		goMainActivity();
+		
+		// 判断是否是第一次打开应用
+		if (sp.getInt("welcome", 0) == 0) {
+			// 3秒后开启主页面
+			System.out.println("第一次打开应用");
+			goMainActivity();
+		} else {
+			System.out.println("不是第一次打开应用");
+			goMainActivity();
+		}
 	}
 
 	/**
@@ -109,5 +120,10 @@ public class Welcome extends Activity {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void onBackPressed() {
+		
 	}
 }

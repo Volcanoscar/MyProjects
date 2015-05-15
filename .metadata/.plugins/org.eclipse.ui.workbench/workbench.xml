@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="27" version="2.0">
+<workbench progressCount="17" version="2.0">
 <workbenchAdvisor/>
 <window height="728" maximized="true" width="1024" x="139" y="32">
 <fastViewData fastViewLocation="1024"/>
@@ -45,11 +45,11 @@
 <editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" partName="activity_main.xml" path="D:/android/MyProjects/投资啦/res/layout/activity_main.xml" title="activity_main.xml" tooltip="投资啦/res/layout/activity_main.xml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/投资啦/res/layout/activity_main.xml"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Welcome.java" partName="Welcome.java" path="D:/android/MyProjects/投资啦/src/com/touzila/limxing/Welcome.java" title="Welcome.java" tooltip="投资啦/src/com/touzila/limxing/Welcome.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Welcome.java" partName="Welcome.java" path="D:/android/MyProjects/投资啦/src/com/touzila/limxing/Welcome.java" title="Welcome.java" tooltip="投资啦/src/com/touzila/limxing/Welcome.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/投资啦/src/com/touzila/limxing/Welcome.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1025" selectionTopPixel="298"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1602" selectionTopPixel="0"/>
 </editor>
-<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="welcome.xml" partName="welcome.xml" path="D:/android/MyProjects/投资啦/res/layout/welcome.xml" title="welcome.xml" tooltip="投资啦/res/layout/welcome.xml" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="welcome.xml" partName="welcome.xml" path="D:/android/MyProjects/投资啦/res/layout/welcome.xml" title="welcome.xml" tooltip="投资啦/res/layout/welcome.xml" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/投资啦/res/layout/welcome.xml"/>
 </editor>
 </editors>
@@ -89,7 +89,7 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings (3 items)"/>
+<category IMemento.internal.id="Warnings (5 items)"/>
 <category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
@@ -122,7 +122,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="com.android.ide.eclipse.editors.CommonXmlEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="0" fixed="0" version="0.016">
 <descriptor class="com.android.ide.eclipse.ddms.Perspective" id="com.android.ide.eclipse.ddms.Perspective" label="DDMS"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -275,12 +275,12 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.eclipse.debug.ui.commands.RunToLine"/>
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="com.android.ide.eclipse.ddms.views.LogCatView"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
 <layout>
@@ -306,7 +306,7 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="250" ratioRight="750" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.66720515" ratioLeft="413" ratioRight="206" relationship="4" relative="org.eclipse.ui.editorss">
+<info folder="true" part="bottom" ratio="0.7770598" ratioLeft="481" ratioRight="138" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -348,37 +348,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/投资啦/res/layout/welcome.xml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/投资啦/AndroidManifest.xml"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="" path="/投资啦/res/layout/welcome.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" path="/投资啦/AndroidManifest.xml"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/投资啦/res/layout/welcome.xml"/>
 </editors>
-<item historyLabel="Welcome.java" index="1">
-<position info="not_deleted" x="473" y="0"/>
-</item>
-<item historyLabel="welcome.xml" index="2">
-<position info="not_deleted" x="290" y="190"/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position info="not_deleted" x="473" y="0"/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position info="not_deleted" x="545" y="0"/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position info="not_deleted" x="640" y="0"/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position info="not_deleted" x="860" y="0"/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position/>
-</item>
-<item historyLabel="Welcome.java" index="1">
-<position/>
-</item>
 <item historyLabel="Welcome.java" index="1">
 <position/>
 </item>
@@ -478,15 +450,48 @@
 <position info="not_deleted" x="1993" y="0"/>
 </item>
 <item historyLabel="activity_main.xml" index="0"/>
-<item active="true" historyLabel="Welcome.java" index="1">
+<item historyLabel="Welcome.java" index="1">
 <position info="not_deleted" x="1993" y="0"/>
 </item>
+<item historyLabel="Welcome.java" index="1">
+<position/>
+</item>
+<item historyLabel="Welcome.java" index="1">
+<position info="not_deleted" x="2535" y="0"/>
+</item>
+<item historyLabel="Welcome.java" index="1">
+<position/>
+</item>
+<item historyLabel="Welcome.java" index="1">
+<position/>
+</item>
+<item historyLabel="投资啦 Manifest" index="5"/>
+<item historyLabel="Welcome.java" index="1">
+<position info="not_deleted" x="925" y="4"/>
+</item>
+<item historyLabel="Welcome.java" index="1">
+<position info="not_deleted" x="1554" y="1"/>
+</item>
+<item historyLabel="Welcome.java" index="1">
+<position info="not_deleted" x="1561" y="0"/>
+</item>
+<item historyLabel="Welcome.java" index="1">
+<position info="not_deleted" x="1602" y="0"/>
+</item>
+<item active="true" historyLabel="welcome.xml" index="6"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
+<trimArea IMemento.internal.id="131072">
+<trimItem IMemento.internal.id="org.eclipse.ui.editorss"/>
+<trimItem IMemento.internal.id="right"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -499,11 +504,11 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="ic_launcher.png" tooltip="投资啦/res/drawable-hdpi/ic_launcher.png">
-<persistable path="/投资啦/res/drawable-hdpi/ic_launcher.png"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.manifest.ManifestEditor" name="AndroidManifest.xml" tooltip="投资啦/AndroidManifest.xml">
 <persistable path="/投资啦/AndroidManifest.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.systemExternalEditor" name="ic_launcher.png" tooltip="投资啦/res/drawable-hdpi/ic_launcher.png">
+<persistable path="/投资啦/res/drawable-hdpi/ic_launcher.png"/>
 </file>
 <file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="themes_holo.xml" tooltip="D:\Develop\adt-bundle-windows-x86_64-20140101\sdk\platforms\android-21\data\res\values\themes_holo.xml">
 <persistable uri="file:/D:/Develop/adt-bundle-windows-x86_64-20140101/sdk/platforms/android-21/data/res/values/themes_holo.xml"/>

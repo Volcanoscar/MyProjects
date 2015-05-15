@@ -1,5 +1,7 @@
 package com.touzila.limxing;
 
+import com.touzila.limxing.R;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;

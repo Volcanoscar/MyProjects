@@ -12,7 +12,7 @@
         android:layout_above="@+id/tv_welcome" />
 
     <TextView
-        android:id="@+id/tv_welcome"
+        android:id="@+id/tv_welcome_touzila"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -23,16 +23,25 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_welcome_load"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/iv_welcome"
+        android:layout_above="@+id/pb_welcome_load"
+        android:layout_alignParentLeft="true"
         android:gravity="center"
         android:paddingBottom="10dp"
         android:text="正在加载..."
         android:textColor="#70000000"
         android:textSize="10sp" />
 
-   
+    <ProgressBar
+        android:id="@+id/pb_welcome_load"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_welcome_touzila"
+        android:layout_centerHorizontal="true"
+        android:minWidth="200dip"
+        android:visibility="invisible" />
 
 </RelativeLayout>

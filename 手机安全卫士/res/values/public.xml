@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <public id="0x7f020003" name="ic_launcher" type="drawable" />
+    <public id="0x7f020000" name="app" type="drawable" />
+    <public id="0x7f020001" name="atools" type="drawable" />
+    <public id="0x7f020002" name="callmsgsafe" type="drawable" />
+    <public id="0x7f020004" name="netmanager" type="drawable" />
+    <public id="0x7f020005" name="safe" type="drawable" />
+    <public id="0x7f020006" name="settings" type="drawable" />
+    <public id="0x7f020007" name="sysoptimize" type="drawable" />
+    <public id="0x7f020008" name="taskmanager" type="drawable" />
+    <public id="0x7f020009" name="trojan" type="drawable" />
+    <public id="0x7f02000a" name="welcome" type="drawable" />
+    <public id="0x7f030000" name="activity_main" type="layout" />
+    <public id="0x7f030001" name="main_items" type="layout" />
+    <public id="0x7f030002" name="welcome" type="layout" />
+    <public id="0x7f040000" name="activity_horizontal_margin" type="dimen" />
+    <public id="0x7f040001" name="activity_vertical_margin" type="dimen" />
+    <public id="0x7f050000" name="app_name" type="string" />
+    <public id="0x7f050001" name="action_settings" type="string" />
+    <public id="0x7f050002" name="hello_world" type="string" />
+    <public id="0x7f050003" name="versioncheckurl" type="string" />
+    <public id="0x7f060000" name="AppTheme" type="style" />
+    <public id="0x7f060001" name="SplashTheme" type="style" />
+    <public id="0x7f060002" name="AppBaseTheme" type="style" />
+    <public id="0x7f070000" name="welcome" type="menu" />
+    <public id="0x7f080000" name="gv_main_items" type="id" />
+    <public id="0x7f080001" name="iv_main_items" type="id" />
+    <public id="0x7f080002" name="tv_main_items" type="id" />
+    <public id="0x7f080003" name="splash" type="id" />
+    <public id="0x7f080004" name="tv_flash_bottem" type="id" />
+    <public id="0x7f080005" name="imageView1" type="id" />
+    <public id="0x7f080006" name="tv_splash_load" type="id" />
+    <public id="0x7f080007" name="pb_splash_download" type="id" />
+    <public id="0x7f080008" name="action_settings" type="id" />
+
+</resources>

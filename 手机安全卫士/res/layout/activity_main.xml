@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#50ffff00"
+        android:gravity="center"
+        android:paddingBottom="10.0dip"
+        android:paddingTop="10.0dip"
+        android:text="黑马·手机安全卫士"
+        android:textSize="20.0sp"
+        android:textStyle="bold" />
+
+    <com.limxing.safe.utils.FocusTextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:focusableInTouchMode="true"
+        android:singleLine="true"
+        android:text="欢迎使用黑马·手机安全卫士，请不要乱点，项目还没有开发完成，点坏你赔！！" />
+
+    <GridView
+        android:id="@id/gv_main_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:numColumns="3"
+        android:verticalSpacing="8.0dip" />
+
+</LinearLayout>

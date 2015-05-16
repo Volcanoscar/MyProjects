@@ -123,6 +123,7 @@ public class Welcome extends Activity {
 		// 如果是wifi联网则下载图片，和检查更新
 		if (!isWifi(this.getApplicationContext())) {
 			checkPicture();
+			
 			checkVersion();
 		} else {
 			goMainActivity();
@@ -134,14 +135,15 @@ public class Welcome extends Activity {
 	 * 检查图片是否要更新
 	 */
 	private void checkPicture() {
-		picPath = getResources().getString(R.string.welcomeurl);
+		
 		new Thread() {
 			public void run() {
 				try {
+					picPath = getResources().getString(R.string.welcomeurl);
 					URL picUrl = new URL(picPath);
 					HttpURLConnection conn = (HttpURLConnection) picUrl
 							.openConnection();
-					conn.setConnectTimeout(5000);
+					conn.setConnectTimeout(2000);
 					int code = conn.getResponseCode();
 					if (code == 200) {
 						downloadPicture(picPath);
@@ -159,6 +161,7 @@ public class Welcome extends Activity {
 	 * 检查版本更新
 	 */
 	private void checkVersion() {
+		
 		new Thread() {
 			public void run() {
 				Message msg = Message.obtain();
@@ -169,8 +172,11 @@ public class Welcome extends Activity {
 							R.string.versionurl));
 					HttpURLConnection conn = (HttpURLConnection) appUrl
 							.openConnection();
-					conn.setReadTimeout(5000);
+					
+					conn.setConnectTimeout(3000);
+					
 					int code = conn.getResponseCode();
+					
 					if (code == 200) {
 						is = conn.getInputStream();
 						String json = StreamUtils.readStream(is);
@@ -178,6 +184,7 @@ public class Welcome extends Activity {
 						if (TextUtils.isEmpty(json)) {
 							ToastUtils.showToast(Welcome.this,
 									"新版本下载失败，稍后重试(001)");
+							msg.what = GO_MAINACTIVITY;
 						} else {
 							JSONObject jsonObj = new JSONObject(json);
 							downloadPath = jsonObj.getString("downloadurl");
@@ -200,16 +207,25 @@ public class Welcome extends Activity {
 					}
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
+					ToastUtils.showToast(Welcome.this, "更新有误，稍后重试(003)");
 					e.printStackTrace();
+					msg.what = GO_MAINACTIVITY;
 				} catch (NotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					ToastUtils.showToast(Welcome.this, "更新有误，稍后重试(004)");
+					msg.what = GO_MAINACTIVITY;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					
+					ToastUtils.showToast(Welcome.this, "更新有误，稍后重试(005)");
+					msg.what = GO_MAINACTIVITY;
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					ToastUtils.showToast(Welcome.this, "更新有误，稍后重试(006)");
+					msg.what = GO_MAINACTIVITY;
 				} finally {
 					if (is != null) {
 						try {

@@ -3,44 +3,37 @@ package com.limxing.jiesuo;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.limxing.jiesuo.LockPatternView.Cell;
-import com.limxing.jiesuo.LockPatternView.DisplayMode;
 import com.limxing.jiesuo.LockPatternView.OnPatternListener;
 
 public class SetScreenLock extends Activity implements OnClickListener {
 
-	// private OnPatternListener onPatternListener;
-
 	private LockPatternView lockPatternView;
-
+	private TextView tv_set_screen_lock;
+	private List<Cell> pattern_first;
 	private LockPatternUtils lockPatternUtils;
-
-	private Button btn_set_pwd;
-
-	private Button btn_reset_pwd;
-
-	private Button btn_check_pwd;
-	
-	private boolean opFLag = true;
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			lockPatternView.clearPattern();
+		}
+	};
+	private boolean isFirst;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_screen_lock);
+		setContentView(R.layout.activity_set_screen_lock);
 		lockPatternView = (LockPatternView) findViewById(R.id.lpv_lock);
-//		btn_reset_pwd = (Button) findViewById(R.id.btn_reset_pwd);
-//		btn_set_pwd = (Button) findViewById(R.id.btn_set_pwd);
-//		btn_check_pwd = (Button) findViewById(R.id.btn_check_pwd);
-//		btn_reset_pwd.setOnClickListener(this);
-//		btn_set_pwd.setOnClickListener(this);
-//		btn_check_pwd.setOnClickListener(this);
-
+		tv_set_screen_lock = (TextView) findViewById(R.id.tv_set_screen_lock);
+		isFirst = true;
 		lockPatternUtils = new LockPatternUtils(this);
 		lockPatternView.setOnPatternListener(new OnPatternListener() {
 
@@ -49,53 +42,62 @@ public class SetScreenLock extends Activity implements OnClickListener {
 			}
 
 			public void onPatternDetected(List<Cell> pattern) {
-				if(opFLag){
-					int result = lockPatternUtils.checkPattern(pattern);
-					if (result!= 1) {
-						if(result==0){
-							lockPatternView.setDisplayMode(DisplayMode.Wrong);
-//							lockPatternView.clearPattern();
-							Toast.makeText(SetScreenLock.this, "密码错误", Toast.LENGTH_LONG)
-							.show();
-						}else{
-							lockPatternView.clearPattern();
-							Toast.makeText(SetScreenLock.this, "请设置密码", Toast.LENGTH_LONG)
-							.show();
-						}
-						
-					} else {
-						Toast.makeText(SetScreenLock.this, "密码正确", Toast.LENGTH_LONG)
-								.show();
+				if (isFirst) {
+					if (pattern.size() < 4) {
+						tv_set_screen_lock.setText("至少绘制4个连接点,请重试");
+						// 创建线程发送隐藏轨迹的ui操作
+						new Thread() {
+							public void run() {
+								try {
+									Message msg = Message.obtain();
+									Thread.sleep(500);
+									handler.sendMessage(msg);
+									return;
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+
+							}
+						}.start();
 					}
-				}else{
-					
+					pattern_first = pattern;
+					isFirst = false;
+					tv_set_screen_lock.setText("再次绘制图案进行确认");
+				} else {
+					if (!pattern_first.toString().equals(pattern.toString())) {
+						tv_set_screen_lock.setText("两次图案不同，请重新绘制");
+						Message msg = Message.obtain();
+						handler.sendMessage(msg);
+						return;
+					}
 					lockPatternUtils.saveLockPattern(pattern);
-					Toast.makeText(SetScreenLock.this, "密码已经设置", Toast.LENGTH_LONG)
-					.show();
-					lockPatternView.clearPattern();
+					Toast.makeText(SetScreenLock.this, "密码设置成功",
+							Toast.LENGTH_SHORT).show();
+					//返回设置的状态为true
+					Intent data = new Intent();
+					data.putExtra("setlockstate", true);
+					setResult(0, data);
+					finish();
 				}
-			
 			}
 
+			@Override
 			public void onPatternCleared() {
+				// TODO Auto-generated method stub
 
 			}
 
+			@Override
 			public void onPatternCellAdded(List<Cell> pattern) {
+				// TODO Auto-generated method stub
 
 			}
 		});
-	} 
-//点击按钮的操作
-	public void onClick(View v) {
-		if (v == btn_reset_pwd) {
-			lockPatternView.clearPattern();
-			lockPatternUtils.clearLock();
-		} else if (v == btn_check_pwd) {
-			opFLag = true;
-		} else {
-			opFLag = false;
-		}
+
 	}
 
+	@Override
+	public void onClick(View v) {
+
+	}
 }

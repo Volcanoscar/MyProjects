@@ -66,6 +66,7 @@ public class LockPatternUtils {
     public void saveLockPattern(List<LockPatternView.Cell> pattern){
     	Editor editor = preference.edit();
     	editor.putString(KEY_LOCK_PWD, patternToString(pattern));
+    	editor.putInt("locktime", 5);
     	editor.commit();
     }
     

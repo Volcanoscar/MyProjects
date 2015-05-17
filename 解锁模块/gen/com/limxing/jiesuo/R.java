@@ -41,11 +41,13 @@ containing a value of this type.
         public static final int indicator_code_lock_point_area_red_holo=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f080004;
+        public static final int action_settings=0x7f080006;
         public static final int lpv_lock=0x7f080000;
         public static final int textView1=0x7f080001;
         public static final int textView2=0x7f080002;
+        public static final int tv_screen_lock=0x7f080004;
         public static final int tv_screen_lock_forget=0x7f080003;
+        public static final int tv_set_screen_lock=0x7f080005;
     }
     public static final class layout {
         public static final int activity_delete_screen_lock=0x7f030000;

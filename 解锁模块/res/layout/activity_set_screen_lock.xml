@@ -14,33 +14,14 @@
         android:layout_centerVertical="true" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_set_screen_lock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:text="欢迎您使用投资啦投资平台"
+        android:layout_marginTop="26dp"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:text="请绘图解锁"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tv_screen_lock_forget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
-        android:text="忘记密码"
-        android:textSize="12sp" />
+        android:text="请绘制解锁图案"
+        android:textSize="18sp" />
 
 </RelativeLayout>

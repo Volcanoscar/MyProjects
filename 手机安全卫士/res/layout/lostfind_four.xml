@@ -6,40 +6,38 @@
 
     <TextView
         style="@style/setTop"
-        android:text="1、 手机卡绑定" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:paddingBottom="1dip"
-        android:paddingTop="1dip"
-        android:text="tips:通过绑定手机卡，下次重启手机如果发现SIM卡变化，就会发送报警短信" />
+        android:text="4、 是否开启防盗保护" />
 
     <RelativeLayout
-        android:background="@drawable/btn_green_normal"
-        android:layout_width="fill_parent"
-        android:layout_height="32dip"
-        android:clickable="true"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/lock" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="5dip"
+        android:paddingTop="10dip" >
 
         <TextView
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="26dp"
-            android:text="点击绑定/解绑SIM卡"
-            android:textSize="16sp" />
+            android:paddingLeft="20dip"
+            android:text="启用防盗保护"
+            android:textSize="20sp" />
 
+        <Switch
+            android:id="@+id/s_lostfind_four_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_lostfind_four_lockstate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dip"
+        android:text="防盗保护未开启"
+        android:textColor="#70000000" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -76,17 +74,17 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@android:drawable/presence_invisible" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/presence_invisible" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@android:drawable/presence_online" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/presence_invisible" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/presence_invisible" />
     </LinearLayout>
 
     <RelativeLayout
@@ -100,16 +98,16 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="22dp"
-            android:src="@drawable/bind" />
+            android:src="@drawable/phone" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/btn_green_normal"
-            android:onClick="next"
+            android:background="@drawable/button_selector"
             android:drawableLeft="@drawable/previous"
+            android:onClick="pre"
             android:text="上一步" />
 
         <Button
@@ -117,11 +115,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:drawableRight="@drawable/next"
-            android:background="@drawable/btn_green_normal"
+            android:background="@drawable/button_selector"
             android:onClick="next"
-            android:text="下一步" />
-
+            android:text="保存设置" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -8,6 +8,12 @@
 package com.limxing.safe;
 
 public final class R {
+    public static final class anim {
+        public static final int next_in=0x7f090000;
+        public static final int next_out=0x7f090001;
+        public static final int pre_in=0x7f090002;
+        public static final int pre_out=0x7f090003;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -25,35 +31,46 @@ public final class R {
         public static final int bind=0x7f02000b;
         public static final int btn_green_normal=0x7f02000c;
         public static final int btn_green_pressed=0x7f02000d;
+        public static final int button_selector=0x7f02000e;
         public static final int callmsgsafe=0x7f020002;
         public static final int ic_launcher=0x7f020003;
-        public static final int lock=0x7f02000e;
+        public static final int list_devider=0x7f02000f;
+        public static final int lock=0x7f020010;
         public static final int netmanager=0x7f020004;
-        public static final int next=0x7f02000f;
-        public static final int phone=0x7f020010;
-        public static final int previous=0x7f020011;
+        public static final int next=0x7f020011;
+        public static final int phone=0x7f020012;
+        public static final int previous=0x7f020013;
         public static final int safe=0x7f020005;
         public static final int settings=0x7f020006;
-        public static final int setup1=0x7f020012;
+        public static final int setup1=0x7f020014;
         public static final int sysoptimize=0x7f020007;
         public static final int taskmanager=0x7f020008;
         public static final int trojan=0x7f020009;
-        public static final int unlock=0x7f020013;
+        public static final int unlock=0x7f020015;
         public static final int welcome=0x7f02000a;
     }
     public static final class id {
         public static final int action_settings=0x7f080008;
-        public static final int bt_cancel=0x7f08000c;
-        public static final int bt_confirm=0x7f08000b;
-        public static final int et_password=0x7f08000a;
-        public static final int et_repassword=0x7f08000d;
+        public static final int bt_cancel=0x7f080015;
+        public static final int bt_confirm=0x7f080014;
+        public static final int et_lostfindthree_safenum=0x7f080011;
+        public static final int et_password=0x7f080013;
+        public static final int et_repassword=0x7f080016;
         public static final int gv_main_items=0x7f080000;
         public static final int imageView1=0x7f080005;
-        public static final int iv_lostfind_lock=0x7f080009;
+        public static final int iv_lostfind_lock=0x7f080012;
         public static final int iv_main_items=0x7f080001;
+        public static final int lv_lostfind_phoneitems=0x7f080010;
         public static final int pb_splash_download=0x7f080007;
+        public static final int s_lostfind_four_lock=0x7f08000a;
+        public static final int s_lostfind_main_protectstate=0x7f08000d;
         public static final int splash=0x7f080003;
+        public static final int textView1=0x7f080009;
         public static final int tv_flash_bottem=0x7f080004;
+        public static final int tv_lostfind_four_lockstate=0x7f08000b;
+        public static final int tv_lostfind_main_safenum=0x7f08000c;
+        public static final int tv_lostfind_phoneitem_name=0x7f08000e;
+        public static final int tv_lostfind_phoneitem_number=0x7f08000f;
         public static final int tv_main_items=0x7f080002;
         public static final int tv_splash_load=0x7f080006;
     }
@@ -62,11 +79,13 @@ public final class R {
         public static final int lostfind_four=0x7f030003;
         public static final int lostfind_main=0x7f030004;
         public static final int lostfind_one=0x7f030005;
-        public static final int lostfind_three=0x7f030006;
-        public static final int lostfind_two=0x7f030007;
+        public static final int lostfind_phoneitem=0x7f030006;
+        public static final int lostfind_phoneitems=0x7f030007;
+        public static final int lostfind_three=0x7f030008;
+        public static final int lostfind_two=0x7f030009;
         public static final int main_items=0x7f030001;
-        public static final int main_putpassword=0x7f030008;
-        public static final int main_setpassword=0x7f030009;
+        public static final int main_putpassword=0x7f03000a;
+        public static final int main_setpassword=0x7f03000b;
         public static final int welcome=0x7f030002;
     }
     public static final class menu {

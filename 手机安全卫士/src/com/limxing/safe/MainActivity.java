@@ -102,8 +102,17 @@ public class MainActivity extends Activity {
 							dialog.dismiss();
 						} else {
 							ToastUtils.showToast(MainActivity.this, "√‹¬Î¥ÌŒÛ");
+							et_password.setText("");
 							return;
 						}
+					}
+				});
+		view.findViewById(R.id.bt_cancel).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
 					}
 				});
 		dialog = builder.show();

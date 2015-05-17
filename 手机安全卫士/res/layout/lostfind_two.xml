@@ -6,7 +6,7 @@
 
     <TextView
         style="@style/setTop"
-        android:text="1、 手机卡绑定" />
+        android:text="2、 手机卡绑定" />
 
     <TextView
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:onClick="bind"
         android:layout_width="fill_parent"
         android:layout_height="32dip"
-        android:background="@drawable/btn_green_normal"
+        android:background="@drawable/button_selector"
         android:clickable="true"
         android:orientation="horizontal" >
 
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:background="@drawable/btn_green_normal"
+            android:background="@drawable/button_selector"
             android:drawableLeft="@drawable/previous"
             android:text="上一步" />
 
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/btn_green_normal"
+            android:background="@drawable/button_selector"
             android:drawableRight="@drawable/next"
             android:onClick="next"
             android:text="下一步" />

@@ -31,6 +31,7 @@ public class LostFindSetTwoActivity extends BaseSetActivity {
 		// ture表示锁上了
 		if (lockState) {
 			editor.putBoolean("lock", false);
+			lockState=false;
 			editor.putString("sim", null);
 			editor.commit();
 			iv_lostfind_lock.setImageResource(R.drawable.unlock);
@@ -38,6 +39,7 @@ public class LostFindSetTwoActivity extends BaseSetActivity {
 		} else {
 			TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 			editor.putBoolean("lock", true);
+			lockState=true;
 			editor.putString("sim", tm.getSimSerialNumber());
 			editor.commit();
 			iv_lostfind_lock.setImageResource(R.drawable.lock);
@@ -47,8 +49,11 @@ public class LostFindSetTwoActivity extends BaseSetActivity {
 
 	@Override
 	void showNext() {
-		startActivityAndFinishSelf(LostFindSetThreeActivity.class);
-
+		if (lockState) {
+			startActivityAndFinishSelf(LostFindSetThreeActivity.class);
+		}else{
+			ToastUtils.showToast(LostFindSetTwoActivity.this, "请先绑定SIM卡号");
+		}
 	}
 
 	@Override

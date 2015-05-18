@@ -6,11 +6,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -30,7 +30,6 @@ public class ScreenLock extends Activity implements OnClickListener {
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			lockPatternView.clearPattern();
-
 		}
 	};
 
@@ -39,7 +38,7 @@ public class ScreenLock extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_screen_lock);
 		lockPatternView = (LockPatternView) findViewById(R.id.lpv_lock);
 		tv_screen_lock = (TextView) findViewById(R.id.tv_screen_lock);
-		sp = getSharedPreferences("info", MODE_PRIVATE);
+		sp = PreferenceManager.getDefaultSharedPreferences(this);
 		locktime = sp.getInt("locktime", 5);
 		findViewById(R.id.tv_screen_lock_forget).setOnClickListener(
 				new OnClickListener() {
@@ -62,25 +61,24 @@ public class ScreenLock extends Activity implements OnClickListener {
 				if (locktime > 0) {
 					int result = lockPatternUtils.checkPattern(pattern);
 					if (result == 0) {
-						lockPatternView.setDisplayMode(DisplayMode.Wrong);
 						locktime = locktime - 1;
 						tv_screen_lock.setText("密码错误，您还有" + locktime + "次机会");
 						tv_screen_lock.setTextColor(Color.RED);
 						wrongKey();
-						Toast.makeText(ScreenLock.this, "密码错误",
-								Toast.LENGTH_LONG).show();
-					} else {
+					} else if (result == 1) {
 						Toast.makeText(ScreenLock.this, "解锁成功,欢迎进入投资啦",
-								Toast.LENGTH_LONG).show();
-//						Intent intent = new Intent();
-//						// 这里需要设置主页面
-//						startActivity(intent);
-//						finish();
+								Toast.LENGTH_SHORT).show();
+						// Intent intent = new Intent();
+						// 这里需要设置返回之前页面
+						// setResult(0,intent);
+						// finish();
+					} else {
+						Toast.makeText(ScreenLock.this, "没有设置锁屏", 0).show();
 					}
 
 				} else {
-					//把locktime设置为0，使其下次进入直接进入用户登录界面
-					Editor editor=sp.edit();
+					// 把locktime设置为0，使其下次进入直接进入用户登录界面
+					Editor editor = sp.edit();
 					editor.putInt("locktime", 0);
 					editor.commit();
 					// 弹出用户登录界面，并清除锁屏密码
@@ -104,8 +102,11 @@ public class ScreenLock extends Activity implements OnClickListener {
 
 	// 忘记密码以及密码次数没有，调用登陆界面并清除锁屏密码，锁屏状态为false，次数是在设置锁屏的地方恢复
 	public void forgetKey() {
-
+		Intent intent=new Intent(ScreenLock.this,SetScreenLock.class);
+		startActivity(intent);
+		finish();
 	}
+
 	public void wrongKey() {
 		lockPatternView.setDisplayMode(DisplayMode.Wrong);
 		// 创建线程发送隐藏轨迹的ui操作
@@ -122,6 +123,13 @@ public class ScreenLock extends Activity implements OnClickListener {
 
 			}
 		}.start();
+	}
+	@Override
+	protected void onDestroy() {
+		Editor editor = sp.edit();
+		editor.putInt("locktime", locktime);
+		editor.commit();
+		super.onDestroy();
 	}
 
 }

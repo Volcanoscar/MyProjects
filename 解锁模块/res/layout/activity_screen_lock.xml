@@ -8,7 +8,7 @@
     <com.limxing.jiesuo.LockPatternView
         xmlns:app="http://schemas.android.com/apk/res/com.wgs.jiesuo"
         android:id="@+id/lpv_lock"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
         android:text="忘记密码"
         android:textSize="12sp" />

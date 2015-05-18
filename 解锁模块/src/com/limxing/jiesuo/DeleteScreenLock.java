@@ -3,11 +3,14 @@ package com.limxing.jiesuo;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.limxing.jiesuo.LockPatternView.Cell;
@@ -16,30 +19,30 @@ import com.limxing.jiesuo.LockPatternView.OnPatternListener;
 
 public class DeleteScreenLock extends Activity implements OnClickListener {
 
-	// private OnPatternListener onPatternListener;
-
 	private LockPatternView lockPatternView;
-
 	private LockPatternUtils lockPatternUtils;
-
-	private Button btn_set_pwd;
-
-	private Button btn_reset_pwd;
-
-	private Button btn_check_pwd;
-	
-	private boolean opFLag = true;
+	private TextView tv_delete_screen_lock;
+	private Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			lockPatternView.clearPattern();
+		}
+	};
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_screen_lock);
 		lockPatternView = (LockPatternView) findViewById(R.id.lpv_lock);
-//		btn_reset_pwd = (Button) findViewById(R.id.btn_reset_pwd);
-//		btn_set_pwd = (Button) findViewById(R.id.btn_set_pwd);
-//		btn_check_pwd = (Button) findViewById(R.id.btn_check_pwd);
-//		btn_reset_pwd.setOnClickListener(this);
-//		btn_set_pwd.setOnClickListener(this);
-//		btn_check_pwd.setOnClickListener(this);
+		tv_delete_screen_lock = (TextView) findViewById(R.id.tv_delete_screen_lock);
+		findViewById(R.id.tv_screen_lock_forget).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// 点击忘记密码进入密码重置的dialog或者Activity，登陆成功则清除密码
+						forgetKey();
+
+					}
+				});
 
 		lockPatternUtils = new LockPatternUtils(this);
 		lockPatternView.setOnPatternListener(new OnPatternListener() {
@@ -49,32 +52,22 @@ public class DeleteScreenLock extends Activity implements OnClickListener {
 			}
 
 			public void onPatternDetected(List<Cell> pattern) {
-				if(opFLag){
-					int result = lockPatternUtils.checkPattern(pattern);
-					if (result!= 1) {
-						if(result==0){
-							lockPatternView.setDisplayMode(DisplayMode.Wrong);
-//							lockPatternView.clearPattern();
-							Toast.makeText(DeleteScreenLock.this, "密码错误", Toast.LENGTH_LONG)
-							.show();
-						}else{
-							lockPatternView.clearPattern();
-							Toast.makeText(DeleteScreenLock.this, "请设置密码", Toast.LENGTH_LONG)
-							.show();
-						}
-						
-					} else {
-						Toast.makeText(DeleteScreenLock.this, "密码正确", Toast.LENGTH_LONG)
-								.show();
-					}
-				}else{
-					
-					lockPatternUtils.saveLockPattern(pattern);
-					Toast.makeText(DeleteScreenLock.this, "密码已经设置", Toast.LENGTH_LONG)
-					.show();
-					lockPatternView.clearPattern();
+				int result = lockPatternUtils.checkPattern(pattern);
+				if (result == 0) {
+					tv_delete_screen_lock.setText("密码错误，请重试");
+					tv_delete_screen_lock.setTextColor(Color.RED);
+					wrongKey();
+				} else if (result == 1) {
+					//解锁成功，调用清密码
+					lockPatternUtils.clearLock();
+					// Intent intent = new Intent();
+					// 返回之前页面
+					// setResult(0,intent);
+					// finish();
+				} else {
+					Toast.makeText(DeleteScreenLock.this, "没有设置锁屏", 0).show();
 				}
-			
+
 			}
 
 			public void onPatternCleared() {
@@ -85,17 +78,36 @@ public class DeleteScreenLock extends Activity implements OnClickListener {
 
 			}
 		});
-	} 
-//点击按钮的操作
-	public void onClick(View v) {
-		if (v == btn_reset_pwd) {
-			lockPatternView.clearPattern();
-			lockPatternUtils.clearLock();
-		} else if (v == btn_check_pwd) {
-			opFLag = true;
-		} else {
-			opFLag = false;
-		}
 	}
+
+	public void onClick(View v) {
+
+	}
+
+	// 忘记密码以及密码次数没有，调用登陆界面并清除锁屏密码，锁屏状态为false，次数是在设置锁屏的地方恢复
+	public void forgetKey() {
+		Intent intent = new Intent(DeleteScreenLock.this, SetScreenLock.class);
+		startActivity(intent);
+		finish();
+	}
+
+	public void wrongKey() {
+		lockPatternView.setDisplayMode(DisplayMode.Wrong);
+		// 创建线程发送隐藏轨迹的ui操作
+		new Thread() {
+			public void run() {
+				try {
+					Message msg = Message.obtain();
+					Thread.sleep(500);
+					handler.sendMessage(msg);
+					return;
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}.start();
+	}
+
 
 }

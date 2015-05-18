@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.limxing.jiesuo.LockPatternView.Cell;
+import com.limxing.jiesuo.LockPatternView.DisplayMode;
 import com.limxing.jiesuo.LockPatternView.OnPatternListener;
 
 public class SetScreenLock extends Activity implements OnClickListener {
@@ -45,20 +46,7 @@ public class SetScreenLock extends Activity implements OnClickListener {
 				if (isFirst) {
 					if (pattern.size() < 4) {
 						tv_set_screen_lock.setText("至少绘制4个连接点,请重试");
-						// 创建线程发送隐藏轨迹的ui操作
-						new Thread() {
-							public void run() {
-								try {
-									Message msg = Message.obtain();
-									Thread.sleep(500);
-									handler.sendMessage(msg);
-									return;
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-
-							}
-						}.start();
+						wrongKey();
 					}
 					pattern_first = pattern;
 					isFirst = false;
@@ -66,30 +54,29 @@ public class SetScreenLock extends Activity implements OnClickListener {
 				} else {
 					if (!pattern_first.toString().equals(pattern.toString())) {
 						tv_set_screen_lock.setText("两次图案不同，请重新绘制");
-						Message msg = Message.obtain();
-						handler.sendMessage(msg);
+						isFirst = true;
+						wrongKey();
 						return;
+					} else {
+						lockPatternUtils.saveLockPattern(pattern);
+						Toast.makeText(SetScreenLock.this, "密码设置成功",
+								Toast.LENGTH_SHORT).show();
+						// 返回设置的状态为true,并返回锁屏状态为true，在接受者那里设置info
+						Intent data = new Intent();
+						data.putExtra("setlockstate", true);
+						setResult(0, data);
+						finish();
 					}
-					lockPatternUtils.saveLockPattern(pattern);
-					Toast.makeText(SetScreenLock.this, "密码设置成功",
-							Toast.LENGTH_SHORT).show();
-					//返回设置的状态为true
-					Intent data = new Intent();
-					data.putExtra("setlockstate", true);
-					setResult(0, data);
-					finish();
 				}
 			}
 
 			@Override
 			public void onPatternCleared() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void onPatternCellAdded(List<Cell> pattern) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -99,5 +86,22 @@ public class SetScreenLock extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
+	}
+
+	public void wrongKey() {
+		lockPatternView.setDisplayMode(DisplayMode.Wrong);
+		// 创建线程发送隐藏轨迹的ui操作
+		new Thread() {
+			public void run() {
+				try {
+					Message msg = Message.obtain();
+					Thread.sleep(500);
+					handler.sendMessage(msg);
+					return;
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
 	}
 }

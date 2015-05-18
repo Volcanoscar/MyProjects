@@ -58,7 +58,7 @@ public class LostFindSetFourActivity extends BaseSetActivity {
 		editor.putBoolean("isSet", true);
 		editor.commit();
 		ToastUtils.showToast(LostFindSetFourActivity.this, "…Ë÷√≥…π¶");
-		startActivityAndFinishSelf(LostFindActivity.class);
+		finish();
 	}
 
 	@Override

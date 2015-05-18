@@ -19,17 +19,7 @@ public class LostFindActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sp = getSharedPreferences("info", MODE_PRIVATE);
-		if (sp.getBoolean("isSet", false)) {
-			setContentView(R.layout.lostfind_main);
-			tv_lostfind_main_safenum = (TextView) findViewById(R.id.tv_lostfind_main_safenum);
-			tv_lostfind_main_safenum.setText(sp.getString("safeNum", "110"));
-			s_lostfind_main_protectstate = (Switch) findViewById(R.id.s_lostfind_main_protectstate);
-			s_lostfind_main_protectstate.setChecked(sp.getBoolean(
-					"protectstate", false));
-		} else {
-			// 如果没有进行设置，则进入设置向导页面
-			setGuide();
-		}
+
 	}
 
 	public void openSetGuide(View view) {
@@ -43,7 +33,24 @@ public class LostFindActivity extends Activity {
 		Intent intent = new Intent(LostFindActivity.this,
 				LostFindSetOneActivity.class);
 		startActivity(intent);
-		finish();
+		// finish();
+	}
+
+	@Override
+	protected void onStart() {
+		if (sp.getBoolean("isSet", false)) {
+			setContentView(R.layout.lostfind_main);
+			tv_lostfind_main_safenum = (TextView) findViewById(R.id.tv_lostfind_main_safenum);
+			s_lostfind_main_protectstate = (Switch) findViewById(R.id.s_lostfind_main_protectstate);
+			s_lostfind_main_protectstate.setChecked(sp.getBoolean(
+					"protectstate", false));
+			tv_lostfind_main_safenum.setText(sp.getString("safeNum", ""));
+			super.onStart();
+		} else {
+			// 如果没有进行设置，则进入设置向导页面
+			setGuide();
+		}
+		super.onStart();
 	}
 
 }

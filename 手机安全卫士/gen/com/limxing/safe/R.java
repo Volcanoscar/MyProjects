@@ -16,6 +16,9 @@ public final class R {
     }
     public static final class attr {
     }
+    public static final class color {
+        public static final int device_admin=0x7f0c0000;
+    }
     public static final class dimen {
         /** 
          Customize dimensions originally defined in res/values/dimens.xml (such as
@@ -91,9 +94,14 @@ public final class R {
     public static final class menu {
         public static final int welcome=0x7f070000;
     }
+    public static final class raw {
+        public static final int ylzs=0x7f0b0000;
+    }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int device_admin_des=0x7f050004;
+        public static final int device_admin_label=0x7f050005;
         public static final int hello_world=0x7f050002;
         public static final int versioncheckurl=0x7f050003;
     }
@@ -114,5 +122,8 @@ public final class R {
         public static final int AppTheme=0x7f060000;
         public static final int SplashTheme=0x7f060001;
         public static final int setTop=0x7f060003;
+    }
+    public static final class xml {
+        public static final int device_admin=0x7f0a0000;
     }
 }

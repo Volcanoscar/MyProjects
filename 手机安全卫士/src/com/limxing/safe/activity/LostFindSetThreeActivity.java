@@ -41,8 +41,7 @@ public class LostFindSetThreeActivity extends BaseSetActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// 判断句是否为空
 		if (data != null) {
-			safeNum = data.getStringExtra("phoneNum");
-			et_lostfindthree_safenum.setText(safeNum);
+			et_lostfindthree_safenum.setText(data.getStringExtra("phoneNum"));
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -52,7 +51,8 @@ public class LostFindSetThreeActivity extends BaseSetActivity {
 	 */
 	@Override
 	void showNext() {
-		if (TextUtils.isEmpty(et_lostfindthree_safenum.getText().toString())) {
+		safeNum=et_lostfindthree_safenum.getText().toString();
+		if (TextUtils.isEmpty(safeNum)) {
 			ToastUtils.showToast(this, "请输入或选择一个安全号码");
 			return;
 		}

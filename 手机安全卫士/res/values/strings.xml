@@ -3,5 +3,7 @@
     <string name="app_name">手机安全卫士</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="device_admin_des">这是管理员权限必须启用</string>
+    <string name="device_admin_label">这个是什么label</string>
     <string name="versioncheckurl">http://192.168.17.30:8080/psb/info.json</string>
 </resources>

@@ -49,6 +49,7 @@
         <activity android:name="com.limxing.safe.activity.PhoneItemActivity" >
         </activity>
         <activity android:name="com.limxing.safe.activity.SetActivity"></activity>
+        <activity android:name="com.limxing.safe.activity.CallSafe"></activity>
 
         <receiver android:name="com.limxing.safe.receivers.BootCompleteReceiver" >
             <intent-filter>

@@ -49,6 +49,7 @@ public class LostFindActivity extends Activity {
 		} else {
 			// 如果没有进行设置，则进入设置向导页面
 			setGuide();
+			finish();
 		}
 		super.onStart();
 	}

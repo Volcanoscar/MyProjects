@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.limxing.safe.activity.CallSafe;
 import com.limxing.safe.activity.LostFindActivity;
 import com.limxing.safe.activity.SetActivity;
 import com.limxing.safe.utils.Md5Utils;
@@ -29,6 +30,7 @@ public class MainActivity extends Activity {
 	private SharedPreferences sp;
 	private View view;
 	private String password;
+	private Intent intent;
 	// 享元模式
 	private AlertDialog dialog;
 	private String[] names = { "手机防盗", "通讯卫士", "软件管家", "进程管理", "流量统计", "手机杀毒",
@@ -65,6 +67,8 @@ public class MainActivity extends Activity {
 					break;
 
 				case 1:
+					intent=new Intent(MainActivity.this,CallSafe.class);
+					startActivity(intent);
 					break;
 				case 2:
 					break;
@@ -75,7 +79,7 @@ public class MainActivity extends Activity {
 				case 5:
 					break;
 				case 8:
-					Intent intent=new Intent(MainActivity.this,SetActivity.class);
+					 intent=new Intent(MainActivity.this,SetActivity.class);
 					startActivity(intent);
 					break;
 				}

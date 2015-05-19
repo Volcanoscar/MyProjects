@@ -56,22 +56,24 @@ containing a value of this type.
         public static final int button_icon_clear=0x7f020011;
         public static final int button_selector=0x7f020012;
         public static final int callmsgsafe=0x7f020002;
+        public static final int iamge_selector=0x7f020013;
         public static final int ic_launcher=0x7f020003;
-        public static final int ic_menu_allfriends=0x7f020013;
-        public static final int ic_menu_invite=0x7f020014;
-        public static final int list_devider=0x7f020015;
-        public static final int lock=0x7f020016;
+        public static final int ic_menu_allfriends=0x7f020014;
+        public static final int ic_menu_invite=0x7f020015;
+        public static final int ic_menu_invite1=0x7f020016;
+        public static final int list_devider=0x7f020017;
+        public static final int lock=0x7f020018;
         public static final int netmanager=0x7f020004;
-        public static final int next=0x7f020017;
-        public static final int phone=0x7f020018;
-        public static final int previous=0x7f020019;
+        public static final int next=0x7f020019;
+        public static final int phone=0x7f02001a;
+        public static final int previous=0x7f02001b;
         public static final int safe=0x7f020005;
         public static final int settings=0x7f020006;
-        public static final int setup1=0x7f02001a;
+        public static final int setup1=0x7f02001c;
         public static final int sysoptimize=0x7f020007;
         public static final int taskmanager=0x7f020008;
         public static final int trojan=0x7f020009;
-        public static final int unlock=0x7f02001b;
+        public static final int unlock=0x7f02001d;
         public static final int welcome=0x7f02000a;
     }
     public static final class id {

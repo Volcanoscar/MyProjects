@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.limxing.safe.activity.LostFindActivity;
+import com.limxing.safe.activity.SetActivity;
 import com.limxing.safe.utils.Md5Utils;
 import com.limxing.safe.utils.ToastUtils;
 
@@ -72,6 +73,10 @@ public class MainActivity extends Activity {
 				case 4:
 					break;
 				case 5:
+					break;
+				case 8:
+					Intent intent=new Intent(MainActivity.this,SetActivity.class);
+					startActivity(intent);
 					break;
 				}
 

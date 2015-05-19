@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -135,16 +136,32 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
+
 		try {
-			
+
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
 			clientName = pi.packageName;
 			clientCode = pi.versionCode;
-			
-			checkVersion();
+			if (getSharedPreferences("info", MODE_PRIVATE).getBoolean(
+					"isUpdate", true)) {
+				checkVersion();
+			}else{
+				new Thread(){
+					public void run(){
+						try {
+							Thread.sleep(2000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						openMainActivity();
+					}
+				}.start();
+				
+			}
 		} catch (NameNotFoundException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -156,15 +173,15 @@ public class WelcomeActivity extends Activity {
 	private void checkVersion() {
 		new Thread() {
 			public void run() {
-				
+
 				InputStream is = null;
 				Message msg = Message.obtain();
 				long startTime = System.currentTimeMillis();
 				try {
-					
+
 					URL checkUrl = new URL(getResources().getString(
 							R.string.versioncheckurl));
-					
+
 					HttpURLConnection conn = (HttpURLConnection) checkUrl
 							.openConnection();
 					conn.setConnectTimeout(3000);
@@ -249,6 +266,7 @@ public class WelcomeActivity extends Activity {
 		startActivity(intent);
 		WelcomeActivity.this.finish();
 	}
+
 	@Override
 	public void onBackPressed() {
 	}

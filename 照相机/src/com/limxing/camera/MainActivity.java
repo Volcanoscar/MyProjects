@@ -25,14 +25,12 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		if (!checkCameraHardware(this)) {
-			System.out.println(111);
 			// 照相机不存在
 			finish();
 		}
 		
 		mCamera=getCameraInstance();
 		if(mCamera==null){
-			System.out.println(222);
 			finish();
 		}
 		

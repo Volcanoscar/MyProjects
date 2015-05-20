@@ -54,4 +54,9 @@ public class LostFindActivity extends Activity {
 		super.onStart();
 	}
 
+	// ·µ»ØÍ¼Æ¬°´Å¥
+	public void back(View view) {
+		onBackPressed();
+	}
+
 }

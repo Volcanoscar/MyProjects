@@ -4,10 +4,26 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        style="@style/setTop"
-        android:gravity="center"
-        android:text="手机防盗" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            style="@style/setTop"
+            android:gravity="center"
+            android:text="手机防盗" />
+
+        <ImageView
+            android:onClick="back"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/image_back_selector"
+            android:src="@drawable/ic_menu_forward" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -53,19 +69,19 @@
             android:textSize="20sp" />
 
         <Switch
-            android:clickable="false"
             android:id="@+id/s_lostfind_main_protectstate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:clickable="false" />
     </RelativeLayout>
 
     <Button
-        android:onClick="openSetGuide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_selector"
+        android:onClick="openSetGuide"
         android:paddingBottom="10dip"
         android:paddingTop="10dip"
         android:text="进入设置向导" />
@@ -106,6 +122,7 @@
             android:text="GPS追踪：#*location*#"
             android:textSize="18sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -126,6 +143,7 @@
             android:text="播放报警音乐：#*alarm*#"
             android:textSize="18sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -146,6 +164,7 @@
             android:text="远程删除数据：#*wipedata*#"
             android:textSize="18sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

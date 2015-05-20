@@ -1,7 +1,6 @@
 package com.limxing.safe.activity;
 
 import android.os.Bundle;
-import android.widget.Button;
 
 import com.limxing.safe.R;
 

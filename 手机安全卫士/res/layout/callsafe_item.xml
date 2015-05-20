@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/callsafe_item_tv_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/callsafe_item_tv_number"
+        android:layout_below="@+id/callsafe_item_tv_number"
+        android:paddingBottom="5dip"
+        android:paddingTop="2dip"
+        android:text="我是mode"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/callsafe_item_tv_mode"
+        android:src="@drawable/list_devider" />
+
+    <TextView
+        android:id="@+id/callsafe_item_tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:paddingTop="10dip"
+        android:text="我是号码"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/callsafe_item_delete"
+        android:layout_width="32dip"
+        android:layout_height="32dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dip"
+        android:button="@drawable/btn_check"
+        android:background="@drawable/image_delete_selector" />
+
+</RelativeLayout>

@@ -215,6 +215,7 @@ public class WelcomeActivity extends Activity {
 				} catch (IOException e) {
 					e.printStackTrace();
 					ToastUtils.showToast(WelcomeActivity.this, "IOException");
+
 					msg.what = OPEN_MAINACTIVITY;
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -229,15 +230,17 @@ public class WelcomeActivity extends Activity {
 							e.printStackTrace();
 						}
 					}
+					System.out.println(2222);
 					// 让线程睡眠2秒钟
 					long endTime = System.currentTimeMillis();
 					long time = endTime - startTime;
+					System.out.println(time);
 					if (time < 2000) {
-						// Thread.sleep(2 - time);
 						SystemClock.sleep(2000 - time);
 						handler.sendMessage(msg);
+					} else {
+						handler.sendMessage(msg);
 					}
-
 				}
 			}
 		}.start();
@@ -259,7 +262,6 @@ public class WelcomeActivity extends Activity {
 	// 初始化数据
 	public void init() {
 		try {
-
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
 			clientName = pi.packageName;

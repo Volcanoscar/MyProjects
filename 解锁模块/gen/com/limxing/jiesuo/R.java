@@ -129,7 +129,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name android:aspect
+          @attr name com.limxing.jiesuo:aspect
         */
         public static final int LockPatternView_aspect = 0;
     };

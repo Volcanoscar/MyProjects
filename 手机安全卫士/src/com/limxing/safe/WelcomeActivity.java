@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -36,6 +35,22 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.limxing.safe.utils.StreamUtils;
 import com.limxing.safe.utils.ToastUtils;
 
+/**
+ * 
+ * 版权：李利锋个人版权所有
+ * 
+ * 版本：1.0
+ * 
+ * 作者：李利锋
+ * 
+ * 创建日期：2015-5-20 下午10:04:44
+ * 
+ * 描述：
+ * 
+ * 
+ * 修订历史：
+ * 
+ */
 public class WelcomeActivity extends Activity {
 	protected static final int OPEN_MAINACTIVITY = 1;
 	protected static final int DOWNLOAD_APP = 2;
@@ -136,34 +151,7 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
-
-		try {
-
-			PackageInfo pi = getPackageManager().getPackageInfo(
-					getPackageName(), 0);
-			clientName = pi.packageName;
-			clientCode = pi.versionCode;
-			if (getSharedPreferences("info", MODE_PRIVATE).getBoolean(
-					"isUpdate", true)) {
-				checkVersion();
-			}else{
-				new Thread(){
-					public void run(){
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						openMainActivity();
-					}
-				}.start();
-				
-			}
-		} catch (NameNotFoundException e) {
-
-			e.printStackTrace();
-		}
+		init();
 
 	}
 
@@ -244,15 +232,12 @@ public class WelcomeActivity extends Activity {
 					// 让线程睡眠2秒钟
 					long endTime = System.currentTimeMillis();
 					long time = endTime - startTime;
-					if (time < 2) {
-						try {
-							Thread.sleep(2 - time);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					if (time < 2000) {
+						// Thread.sleep(2 - time);
+						SystemClock.sleep(2000 - time);
+						handler.sendMessage(msg);
 					}
-					handler.sendMessage(msg);
+
 				}
 			}
 		}.start();
@@ -269,6 +254,33 @@ public class WelcomeActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
+	}
+
+	// 初始化数据
+	public void init() {
+		try {
+
+			PackageInfo pi = getPackageManager().getPackageInfo(
+					getPackageName(), 0);
+			clientName = pi.packageName;
+			clientCode = pi.versionCode;
+			if (getSharedPreferences("info", MODE_PRIVATE).getBoolean(
+					"isUpdate", true)) {
+				checkVersion();
+			} else {
+				new Thread() {
+					public void run() {
+						SystemClock.sleep(2000);
+						openMainActivity();
+					}
+				}.start();
+
+			}
+		} catch (NameNotFoundException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 }

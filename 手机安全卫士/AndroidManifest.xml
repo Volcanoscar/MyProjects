@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <!-- 配置测试的指令集，配置测试那个应用程序 -->
     <instrumentation

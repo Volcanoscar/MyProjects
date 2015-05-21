@@ -106,14 +106,15 @@ public class Welcome extends Activity {
 
 		tv_welcome_load = (TextView) findViewById(R.id.tv_welcome_load);
 		// 判断应用缓存中是否含有Welcome图片，如果有则欢迎页使用这个，如果没有则使用app中assects中的照片
-		File file = new File(this.getCacheDir(), "welcome.jpg");
+		File file = new File(this.getCacheDir(), "welcome.png");
 		if (file.isFile()) {
 			bitmap = BitmapFactory.decodeFile(file.toString());
 			iv_welcome.setImageBitmap(bitmap);
 		} else {
-			iv_welcome.setImageResource(R.drawable.psb);
+			iv_welcome.setImageResource(R.drawable.w520);
 		}
 		try {
+			//获取版本信息
 			PackageInfo packageInfo = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
 			clientCode = packageInfo.versionCode;
@@ -123,7 +124,6 @@ public class Welcome extends Activity {
 		// 如果是wifi联网则下载图片，和检查更新
 		if (!isWifi(this.getApplicationContext())) {
 			checkPicture();
-			
 			checkVersion();
 		} else {
 			goMainActivity();
@@ -132,7 +132,7 @@ public class Welcome extends Activity {
 	}
 
 	/**
-	 * 检查图片是否要更新
+	 * 检查图片是否要更新,原理是判断服务器上是否含有Welcome这个文件，只要存在就下载
 	 */
 	private void checkPicture() {
 		
@@ -231,12 +231,10 @@ public class Welcome extends Activity {
 						try {
 							is.close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
 					handler.sendMessage(msg);
-
 				}
 			}
 		}.start();
@@ -366,7 +364,7 @@ public class Welcome extends Activity {
 			new Thread() {
 				public void run() {
 					try {
-						Thread.sleep(3000);
+						Thread.sleep(2000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

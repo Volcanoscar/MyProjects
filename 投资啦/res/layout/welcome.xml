@@ -9,18 +9,8 @@
         android:id="@+id/iv_welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/tv_welcome" />
-
-    <TextView
-        android:id="@+id/tv_welcome_touzila"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:paddingBottom="20dp"
-        android:text="touzila.com"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:scaleType="fitXY"
+        android:layout_above="@+id/tv_welcome_load" />
 
     <TextView
         android:id="@+id/tv_welcome_load"
@@ -31,17 +21,27 @@
         android:gravity="center"
         android:paddingBottom="10dp"
         android:text="正在加载..."
-        android:textColor="#70000000"
-        android:textSize="10sp" />
+        android:textColor="#80000000"
+        android:textSize="12sp" />
 
     <ProgressBar
         android:id="@+id/pb_welcome_load"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_welcome_touzila"
+        android:layout_above="@+id/welcome_iv_logo"
         android:layout_centerHorizontal="true"
         android:minWidth="200dip"
         android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/welcome_iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:src="@drawable/logo" />
 
 </RelativeLayout>

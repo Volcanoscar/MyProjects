@@ -4,23 +4,29 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.telephony.PhoneStateListener;
+import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.ITelephony;
 import com.limxing.safe.db.dao.BlackNumberDao;
+import com.limxing.safe.receivers.SmsReceiver;
 
 public class CallSafeService extends Service {
 	private TelephonyManager mTelephonyManager;
 	private BlackNumberDao mBlackNumberDao;
 	private MyPhoneListener mListener;
+	private MySmsReceiver receiver;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -29,13 +35,19 @@ public class CallSafeService extends Service {
 
 	@Override
 	public void onCreate() {
-		super.onCreate();
 		mBlackNumberDao = new BlackNumberDao(this);
+		//开启电话状态监听
 		mTelephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		mListener = new MyPhoneListener();
 		mTelephonyManager.listen(mListener,
 				PhoneStateListener.LISTEN_CALL_STATE);
-
+		//开启短信广播接受者
+		receiver = new MySmsReceiver();
+		IntentFilter filter = new IntentFilter(
+				"android.provider.Telephony.SMS_RECEIVED");
+		filter.setPriority(Integer.MAX_VALUE);
+		registerReceiver(receiver, filter);
+		super.onCreate();
 	}
 
 	// 手机通话状态监听器
@@ -67,6 +79,7 @@ public class CallSafeService extends Service {
 
 	private class CallLogObserver extends ContentObserver {
 		private String incomingNumber;
+
 		public CallLogObserver(Handler handler, String incomingNumber) {
 			super(handler);
 			this.incomingNumber = incomingNumber;
@@ -77,7 +90,7 @@ public class CallSafeService extends Service {
 		public void onChange(boolean selfChange) {
 			// 关闭观察者
 			getContentResolver().unregisterContentObserver(this);
-			//删除通话记录，调用下面的方法
+			// 删除通话记录，调用下面的方法
 			deleteCallLog(incomingNumber);
 			super.onChange(selfChange);
 		}
@@ -95,10 +108,11 @@ public class CallSafeService extends Service {
 	// 挂断电话的操作
 	public void endCall() {
 		try {
-			Class clazz=getClassLoader().loadClass("android.os.ServiceManager");
-			Method method=clazz.getDeclaredMethod("getService", String.class);
-			IBinder iBinder=(IBinder) method.invoke(null, TELEPHONY_SERVICE);
-			ITelephony iTelephony=ITelephony.Stub.asInterface(iBinder);
+			Class clazz = getClassLoader().loadClass(
+					"android.os.ServiceManager");
+			Method method = clazz.getDeclaredMethod("getService", String.class);
+			IBinder iBinder = (IBinder) method.invoke(null, TELEPHONY_SERVICE);
+			ITelephony iTelephony = ITelephony.Stub.asInterface(iBinder);
 			iTelephony.endCall();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -113,8 +127,27 @@ public class CallSafeService extends Service {
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		
+	}
+//创建短信广播接收者
+	private class MySmsReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			Object[] objs = (Object[]) intent.getExtras().get("pdus");
+			for (Object obj : objs) {
+				SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) obj);
+				String smsName = smsMessage.getOriginatingAddress();
+				String mode = mBlackNumberDao.findMode(smsName);
+				if ("1".equals(mode) || "3".equals(mode)) {
+					abortBroadcast();
+				}
+			}
 
+		}
+	}
+	@Override
+	public void onDestroy() {
+		unregisterReceiver(receiver);
+		super.onDestroy();
 	}
 
 }

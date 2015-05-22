@@ -24,7 +24,6 @@ public class SmsReceiver extends BroadcastReceiver {
 		Object[] objs = (Object[]) intent.getExtras().get("pdus");
 		for (Object obj : objs) {
 			SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) obj);
-			
 			String body = smsMessage.getMessageBody();
 			if ("#*location*#".equals(body)) {
 				Intent service = new Intent(context, LocationService.class);

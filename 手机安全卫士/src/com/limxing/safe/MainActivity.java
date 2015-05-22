@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.limxing.safe.activity.CallSafe;
 import com.limxing.safe.activity.LostFindActivity;
 import com.limxing.safe.activity.SetActivity;
+import com.limxing.safe.activity.ToolsActivity;
 import com.limxing.safe.utils.Md5Utils;
 import com.limxing.safe.utils.ToastUtils;
 
@@ -33,6 +34,7 @@ public class MainActivity extends Activity {
 	private Intent intent;
 	// 享元模式
 	private AlertDialog dialog;
+
 	private String[] names = { "手机防盗", "通讯卫士", "软件管家", "进程管理", "流量统计", "手机杀毒",
 			"缓存清理", "高级工具", "设置中心" };
 	private int[] icons = { R.drawable.safe, R.drawable.callmsgsafe,
@@ -67,7 +69,7 @@ public class MainActivity extends Activity {
 					break;
 
 				case 1:
-					intent=new Intent(MainActivity.this,CallSafe.class);
+					intent = new Intent(MainActivity.this, CallSafe.class);
 					startActivity(intent);
 					break;
 				case 2:
@@ -76,10 +78,12 @@ public class MainActivity extends Activity {
 					break;
 				case 4:
 					break;
-				case 5:
+				case 7:
+					intent = new Intent(MainActivity.this, ToolsActivity.class);
+					startActivity(intent);
 					break;
 				case 8:
-					 intent=new Intent(MainActivity.this,SetActivity.class);
+					intent = new Intent(MainActivity.this, SetActivity.class);
 					startActivity(intent);
 					break;
 				}

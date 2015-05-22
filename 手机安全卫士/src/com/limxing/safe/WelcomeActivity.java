@@ -1,6 +1,8 @@
 package com.limxing.safe;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -260,6 +262,7 @@ public class WelcomeActivity extends Activity {
 
 	// 初始化数据
 	public void init() {
+		copyDB("address.db");
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
@@ -291,6 +294,38 @@ public class WelcomeActivity extends Activity {
 	public void startBlackService() {
 		Intent intent = new Intent(this, CallSafeService.class);
 		startService(intent);
+	}
+	//更新数据库
+	public void copyDB(final String dbName){
+		//判断是否存在缓存数据库
+		new Thread(){
+			public void run(){
+				File file=new File(getFilesDir(),dbName);
+				if(file.exists()&&file.length()>0){
+					//数据库存在
+					return;
+				}
+				try {
+					InputStream is=getAssets().open(dbName);
+					FileOutputStream fos=openFileOutput(dbName, MODE_PRIVATE);
+					byte[] buffer=new byte[1024];
+					int len=0;
+					while((len=is.read(buffer))!=-1){
+						fos.write(buffer,0,len);
+					}
+					is.close();
+					fos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}.start();
+		
+		
 	}
 
 }

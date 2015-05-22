@@ -64,6 +64,10 @@
         </activity>
         <activity android:name="com.limxing.safe.activity.CallSafe" >
         </activity>
+        <activity android:name="com.limxing.safe.activity.ToolsActivity" >
+        </activity>
+        <activity android:name="com.limxing.safe.activity.ToolLocationActivity" >
+        </activity>
 
         <receiver android:name="com.limxing.safe.receivers.BootCompleteReceiver" >
             <intent-filter>

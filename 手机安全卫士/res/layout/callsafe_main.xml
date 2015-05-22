@@ -4,16 +4,21 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <TextView
+        style="@style/setTop"
+        android:layout_height="25dip" />
+
     <RelativeLayout style="@style/setTop" >
+
         <ImageView
-            android:onClick="back"
-            android:clickable="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:background="@drawable/image_back_selector"
+            android:clickable="true"
+            android:onClick="back"
             android:src="@drawable/ic_menu_forward" />
 
         <TextView
@@ -36,9 +41,9 @@
     </RelativeLayout>
 
     <FrameLayout
-        android:background="#ffffff"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:background="#ffffff" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="目前没有数据"
-                android:visibility="invisible"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="invisible" />
 
             <LinearLayout
                 android:id="@+id/callsafe_main_loading"

@@ -32,6 +32,7 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.limxing.safe.service.CallSafeService;
 import com.limxing.safe.utils.StreamUtils;
 import com.limxing.safe.utils.ToastUtils;
 
@@ -230,11 +231,9 @@ public class WelcomeActivity extends Activity {
 							e.printStackTrace();
 						}
 					}
-					System.out.println(2222);
 					// 让线程睡眠2秒钟
 					long endTime = System.currentTimeMillis();
 					long time = endTime - startTime;
-					System.out.println(time);
 					if (time < 2000) {
 						SystemClock.sleep(2000 - time);
 						handler.sendMessage(msg);
@@ -278,11 +277,20 @@ public class WelcomeActivity extends Activity {
 				}.start();
 
 			}
+			if (getSharedPreferences("info", MODE_PRIVATE).getBoolean(
+					"isBlack", true)) {
+				startBlackService();
+			}
 		} catch (NameNotFoundException e) {
-
 			e.printStackTrace();
 		}
 
+	}
+
+	// 开启黑名单服务
+	public void startBlackService() {
+		Intent intent = new Intent(this, CallSafeService.class);
+		startService(intent);
 	}
 
 }

@@ -21,10 +21,10 @@ public class SmsReceiver extends BroadcastReceiver {
 		final DevicePolicyManager dpm = (DevicePolicyManager) context
 				.getSystemService(Context.DEVICE_POLICY_SERVICE);
 		componentName = new ComponentName(context, MyDeviceAdmin.class);
-
 		Object[] objs = (Object[]) intent.getExtras().get("pdus");
 		for (Object obj : objs) {
 			SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) obj);
+			
 			String body = smsMessage.getMessageBody();
 			if ("#*location*#".equals(body)) {
 				Intent service = new Intent(context, LocationService.class);
@@ -49,11 +49,6 @@ public class SmsReceiver extends BroadcastReceiver {
 			}
 
 		}
-
-	}
-
-	private void startActivityForResult(Intent data, int i) {
-		// TODO Auto-generated method stub
 
 	}
 }

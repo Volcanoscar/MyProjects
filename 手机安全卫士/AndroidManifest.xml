@@ -25,6 +25,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
 
     <application
         android:allowBackup="true"
@@ -88,6 +91,8 @@
         </receiver>
 
         <service android:name="com.limxing.safe.service.LocationService" >
+        </service>
+        <service android:name="com.limxing.safe.service.CallSafeService" >
         </service>
     </application>
 

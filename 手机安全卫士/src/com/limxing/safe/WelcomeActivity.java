@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources.NotFoundException;
@@ -29,12 +30,15 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.widget.ProgressBar;
+import android.widget.ShareActionProvider;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.limxing.safe.service.CallLocationService;
 import com.limxing.safe.service.CallSafeService;
+import com.limxing.safe.utils.FileUtils;
 import com.limxing.safe.utils.StreamUtils;
 import com.limxing.safe.utils.ToastUtils;
 
@@ -59,6 +63,7 @@ public class WelcomeActivity extends Activity {
 	protected static final int DOWNLOAD_APP = 2;
 	private int clientCode;
 	private String clientName;
+	private SharedPreferences sp;
 	private String desc;
 	private String downloadPath;
 	private ProgressBar pb_splash_download;
@@ -262,13 +267,14 @@ public class WelcomeActivity extends Activity {
 
 	// 初始化数据
 	public void init() {
+		sp=getSharedPreferences("info", MODE_PRIVATE);
 		copyDB("address.db");
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
 			clientName = pi.packageName;
 			clientCode = pi.versionCode;
-			if (getSharedPreferences("info", MODE_PRIVATE).getBoolean(
+			if (sp.getBoolean(
 					"isUpdate", true)) {
 				checkVersion();
 			} else {
@@ -280,12 +286,15 @@ public class WelcomeActivity extends Activity {
 				}.start();
 
 			}
-			if (getSharedPreferences("info", MODE_PRIVATE).getBoolean(
+			if (sp.getBoolean(
 					"isBlack", true)) {
 				startBlackService();
 			}
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
+		}
+		if(sp.getBoolean("isAddress", true)){
+			openLocation();
 		}
 
 	}
@@ -295,23 +304,30 @@ public class WelcomeActivity extends Activity {
 		Intent intent = new Intent(this, CallSafeService.class);
 		startService(intent);
 	}
-	//更新数据库
-	public void copyDB(final String dbName){
-		//判断是否存在缓存数据库
-		new Thread(){
-			public void run(){
-				File file=new File(getFilesDir(),dbName);
-				if(file.exists()&&file.length()>0){
-					//数据库存在
+
+	// 更新数据库:
+	/**
+	 * 
+	 * @param dbName
+	 */
+	public void copyDB(final String dbName) {
+		// 判断是否存在缓存数据库
+		new Thread() {
+			public void run() {
+				InputStream is = null;
+				FileOutputStream fos = null;
+				File file = new File(getFilesDir(), dbName);
+				if (file.exists() && file.length() > 0) {
+					// 数据库存在
 					return;
 				}
 				try {
-					InputStream is=getAssets().open(dbName);
-					FileOutputStream fos=openFileOutput(dbName, MODE_PRIVATE);
-					byte[] buffer=new byte[1024];
-					int len=0;
-					while((len=is.read(buffer))!=-1){
-						fos.write(buffer,0,len);
+					is = getAssets().open(dbName);
+					fos = openFileOutput(dbName, MODE_PRIVATE);
+					byte[] buffer = new byte[1024];
+					int len = 0;
+					while ((len = is.read(buffer)) != -1) {
+						fos.write(buffer, 0, len);
 					}
 					is.close();
 					fos.close();
@@ -321,11 +337,31 @@ public class WelcomeActivity extends Activity {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} finally {
+					if (is != null) {
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					if (fos != null) {
+						try {
+							fos.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 				}
 			}
 		}.start();
-		
-		
+
 	}
+	//开起来电归属地
+	public void openLocation(){
+		Intent service=new Intent(this,CallLocationService.class);
+		startService(service);
+	}
+
 
 }

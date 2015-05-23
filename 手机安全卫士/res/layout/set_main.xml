@@ -4,14 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-     <TextView
+
+    <TextView
         style="@style/setTop"
-        android:layout_height="25dip"
-         />
- <TextView
+        android:layout_height="25dip" />
+
+    <TextView
         style="@style/setTop"
         android:gravity="center"
         android:text="设置中心" />
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
@@ -38,22 +40,46 @@
             </com.limxing.safe.ui.SetItem>
 
             <com.limxing.safe.ui.SetItem
-                android:id="@+id/set_main_si_destory"
+                android:id="@+id/set_main_si_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                limxing:desc="自毁模式已开启#自毁模式已关闭"
-                limxing:title="是否开启自毁模式" >
+                limxing:desc="来电归属地已开启#来电归属地已关闭"
+                limxing:title="是否开启来电归属地" >
             </com.limxing.safe.ui.SetItem>
 
-            <com.limxing.safe.ui.SetItem
-                android:id="@+id/set_main_si_lostfind"
-                android:layout_width="fill_parent"
+            <RelativeLayout
+                android:id="@+id/set_main_location_rl"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                limxing:desc="防盗保护已开启#防盗保护已关闭"
-                limxing:title="是否开启防盗保护" >
-            </com.limxing.safe.ui.SetItem>
+                android:paddingBottom="10dip"
+                android:paddingLeft="20dip"
+                android:paddingTop="10dip" >
 
-         
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="来电归属地窗体颜色"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/set_main_location_skin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textView1"
+                    android:text="这是窗口的颜色"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="18dp"
+                    android:src="@drawable/image_location_selector" />
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

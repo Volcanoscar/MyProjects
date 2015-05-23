@@ -1,14 +1,20 @@
 package com.limxing.safe.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.limxing.safe.R;
+import com.limxing.safe.service.CallLocationService;
 import com.limxing.safe.service.CallSafeService;
 import com.limxing.safe.ui.SetItem;
 import com.limxing.safe.utils.SystemInfoUtils;
@@ -16,9 +22,14 @@ import com.limxing.safe.utils.SystemInfoUtils;
 public class SetActivity extends Activity {
 	private com.limxing.safe.ui.SetItem set_main_si_update;
 	private com.limxing.safe.ui.SetItem set_main_si_black;
+	private com.limxing.safe.ui.SetItem set_main_si_address;
+	private TextView set_main_location_skin;
+	private RelativeLayout set_main_location_rl;
 	private SharedPreferences sp;
 	private boolean isUpdate;
 	private boolean isBlack;
+	private boolean isAddress;
+	private String[] styles = { "半透明", "活力橙", "卫士蓝", "金属灰", "苹果绿" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +44,62 @@ public class SetActivity extends Activity {
 		sp = getSharedPreferences("info", MODE_PRIVATE);
 		set_main_si_update = (SetItem) findViewById(R.id.set_main_si_update);
 		set_main_si_black = (SetItem) findViewById(R.id.set_main_si_black);
+		set_main_si_address = (SetItem) findViewById(R.id.set_main_si_address);
+		set_main_location_skin = (TextView) findViewById(R.id.set_main_location_skin);
+		set_main_location_rl = (RelativeLayout) findViewById(R.id.set_main_location_rl);
 		isUpdate = sp.getBoolean("isUpdate", true);
 		isBlack = sp.getBoolean("isBlack", true);
+		isAddress = sp.getBoolean("isAddress", true);
+		set_main_location_skin.setText(styles[sp.getInt("skin", 0)]);
+		set_main_location_rl.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				changeSkin();
+			}
+		});
 	}
 
 	public void init() {
+
 		checkUpdate();
 		checkBlack();
+		checkAddress();
+
+	}
+
+	// 判断是否开启了归属地显示
+	private void checkAddress() {
+		set_main_si_address.changeCheckState(isAddress);
+		set_main_si_address.setOnClickListener(new OnClickListener() {
+			private Intent addrssIntent = new Intent(SetActivity.this,
+					CallLocationService.class);
+
+			@Override
+			public void onClick(View v) {
+				Editor editor = sp.edit();
+				if (isAddress) {
+					isAddress = false;
+					set_main_si_address.changeCheckState(false);
+					editor.putBoolean("isAddress", false);
+					stopService(addrssIntent);
+
+				} else {
+					isAddress = true;
+					set_main_si_address.changeCheckState(true);
+					editor.putBoolean("isAddress", true);
+					startService(addrssIntent);
+
+				}
+				editor.commit();
+			}
+		});
 
 	}
 
 	// 判断是否开启了拦截黑名单的功能
 	private void checkBlack() {
 		set_main_si_black.changeCheckState(isBlack);
-
 		set_main_si_black.setOnClickListener(new OnClickListener() {
 			private Intent blackIntent = new Intent(SetActivity.this,
 					CallSafeService.class);
@@ -79,6 +131,8 @@ public class SetActivity extends Activity {
 		// 需要获取系统的状态是否开启了某个服务
 		isBlack = SystemInfoUtils.isServiceRunning(this,
 				"com.limxing.safe.service.CallSafeService");
+		isAddress = SystemInfoUtils.isServiceRunning(this,
+				"com.limxing.safe.service.CallLocationService");
 		super.onStart();
 	}
 
@@ -104,4 +158,25 @@ public class SetActivity extends Activity {
 		});
 
 	}
+
+	// 点击条目
+	public void changeSkin() {
+		AlertDialog.Builder builder = new Builder(this);
+		builder.setIcon(R.drawable.settings);
+		builder.setSingleChoiceItems(styles, sp.getInt("skin", 0),
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Editor editor = sp.edit();
+						editor.putInt("skin", which);
+						editor.commit();
+						set_main_location_skin.setText(styles[which]);
+						dialog.dismiss();
+					}
+				});
+		builder.show();
+
+	}
+
 }

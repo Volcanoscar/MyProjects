@@ -154,6 +154,7 @@ public class SmsUtils {
 					resolver.insert(uri, values);
 					process++;
 					resortState.process(process);
+					SystemClock.sleep(500);
 				}
 				type = parser.next();
 			}

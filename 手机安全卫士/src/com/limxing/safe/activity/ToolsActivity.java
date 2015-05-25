@@ -104,34 +104,37 @@ public class ToolsActivity extends Activity {
 				pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 				pd.setMessage("正在还原");
 				pd.show();
-				try {
-					SmsUtils.Restor(getApplicationContext(), new ResortState() {
+				new Thread() {
+					public void run() {
+						try {
+							SmsUtils.Restor(getApplicationContext(),
+									new ResortState() {
 
-						@Override
-						public void process(int process) {
-							pd.setProgress(process);
+										@Override
+										public void process(int process) {
+											pd.setProgress(process);
 
+										}
+
+										@Override
+										public void beforeBackup(int size) {
+											pd.setMax(size);
+
+										}
+									});
+						} catch (XmlPullParserException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						} finally {
+							pd.dismiss();
 						}
 
-						@Override
-						public void beforeBackup(int size) {
-							pd.setMax(size);
-
-						}
-					});
-				} catch (XmlPullParserException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}finally {
-					pd.dismiss();
-				}
-
+					}
+				}.start();
 			}
 		});
 	}
-
-	
 
 	// 返回按钮
 	public void back(View view) {

@@ -2,6 +2,8 @@ package com.limxing.safe.activity;
 
 import java.io.IOException;
 
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,9 +13,10 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.limxing.safe.R;
-import com.limxing.safe.utils.SmsBackUp;
+import com.limxing.safe.utils.SmsUtils;
+import com.limxing.safe.utils.SmsUtils.ResortState;
 import com.limxing.safe.utils.ToastUtils;
-import com.limxing.safe.utils.SmsBackUp.BackState;
+import com.limxing.safe.utils.SmsUtils.BackState;
 
 public class ToolsActivity extends Activity {
 	private TextView tools_tv_location;
@@ -60,7 +63,7 @@ public class ToolsActivity extends Activity {
 					public void run() {
 
 						try {
-							SmsBackUp.backUp(getApplicationContext(),
+							SmsUtils.BackUp(getApplicationContext(),
 									new BackState() {
 
 										@Override
@@ -97,10 +100,38 @@ public class ToolsActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				pd = new ProgressDialog(ToolsActivity.this);
+				pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+				pd.setMessage("正在还原");
+				pd.show();
+				try {
+					SmsUtils.Restor(getApplicationContext(), new ResortState() {
+
+						@Override
+						public void process(int process) {
+							pd.setProgress(process);
+
+						}
+
+						@Override
+						public void beforeBackup(int size) {
+							pd.setMax(size);
+
+						}
+					});
+				} catch (XmlPullParserException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}finally {
+					pd.dismiss();
+				}
 
 			}
 		});
 	}
+
+	
 
 	// 返回按钮
 	public void back(View view) {
@@ -108,3 +139,6 @@ public class ToolsActivity extends Activity {
 
 	}
 }
+
+/*
+*/

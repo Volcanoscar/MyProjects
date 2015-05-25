@@ -1,13 +1,17 @@
 package com.limxing.safe.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -31,11 +35,10 @@ import android.util.Xml;
  * 修订历史：
  * 
  */
-public class SmsBackUp {
+public class SmsUtils {
 
-	public static boolean backUp(final Context context, BackState backState)
+	public static boolean BackUp(final Context context, BackState backState)
 			throws IllegalArgumentException, IllegalStateException, IOException {
-
 		ContentResolver resolver = context.getContentResolver();
 		Uri uri = Uri.parse("content://sms/");
 		Cursor cursor = resolver.query(uri, new String[] { "address", "body",
@@ -81,7 +84,6 @@ public class SmsBackUp {
 				serializer.text(cursor.getString(3));
 				serializer.endTag(null, "date");
 				serializer.endTag(null, "sms");
-
 				process++;
 				backState.process(process);
 				SystemClock.sleep(500);
@@ -100,6 +102,68 @@ public class SmsBackUp {
 	}
 
 	public interface BackState {
+		// 备份时
+		public void process(int process);
+
+		// 备份前
+		public void beforeBackup(int size);
+	}
+
+	// 还原短信
+	public static boolean Restor(Context context, ResortState resortState)
+			throws XmlPullParserException, IOException {
+		// 解析xml文件
+		File file = new File(Environment.getExternalStorageDirectory(),
+				"smsBackup.xml");
+		if (file.exists()) {
+			ContentResolver resolver = context.getContentResolver();
+			Uri uri = Uri.parse("content://sms/");
+			// resolver.insert(uri, values);
+			XmlPullParser parser = Xml.newPullParser();
+			FileInputStream fis = new FileInputStream(file);
+			parser.setInput(fis, "utf-8");
+			int type = parser.getEventType();
+			ContentValues values = new ContentValues();
+			int process = 0;
+			while (type != XmlPullParser.END_DOCUMENT) {
+				if (type == XmlPullParser.START_TAG) {
+
+					if ("smss".equals(parser.getName())) {
+						resortState.beforeBackup(Integer.valueOf(parser
+								.getAttributeValue(null, "size")));
+					}
+					if ("body".equals(parser.getName())) {
+						try {
+							values.put("body",
+									Crypto.decrypt("123", parser.nextText()));
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					if ("address".equals(parser.getName())) {
+						values.put("address", parser.nextText());
+					}
+					if ("type".equals(parser.getName())) {
+						values.put("type", parser.nextText());
+					}
+					if ("date".equals(parser.getName())) {
+						values.put("date", parser.nextText());
+					}
+				} else if (type == XmlPullParser.END_TAG
+						&& !"smss".equals(parser.getName())) {
+					resolver.insert(uri, values);
+					process++;
+					resortState.process(process);
+				}
+				type = parser.next();
+			}
+			return true;
+		} else {
+			throw new FileNotFoundException("没有可还原的数据");
+		}
+	}
+
+	public interface ResortState {
 		// 备份时
 		public void process(int process);
 

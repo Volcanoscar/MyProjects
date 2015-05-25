@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources.NotFoundException;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,7 +31,6 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.widget.ProgressBar;
-import android.widget.ShareActionProvider;
 
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -38,7 +38,6 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.limxing.safe.service.CallLocationService;
 import com.limxing.safe.service.CallSafeService;
-import com.limxing.safe.utils.FileUtils;
 import com.limxing.safe.utils.StreamUtils;
 import com.limxing.safe.utils.ToastUtils;
 
@@ -267,15 +266,14 @@ public class WelcomeActivity extends Activity {
 
 	// 初始化数据
 	public void init() {
-		sp=getSharedPreferences("info", MODE_PRIVATE);
+		sp = getSharedPreferences("info", MODE_PRIVATE);
 		copyDB("address.db");
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
 			clientName = pi.packageName;
 			clientCode = pi.versionCode;
-			if (sp.getBoolean(
-					"isUpdate", true)) {
+			if (sp.getBoolean("isUpdate", true)) {
 				checkVersion();
 			} else {
 				new Thread() {
@@ -286,15 +284,17 @@ public class WelcomeActivity extends Activity {
 				}.start();
 
 			}
-			if (sp.getBoolean(
-					"isBlack", true)) {
+			if (sp.getBoolean("isBlack", true)) {
 				startBlackService();
 			}
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		if(sp.getBoolean("isAddress", true)){
+		if (sp.getBoolean("isAddress", true)) {
 			openLocation();
+		}
+		if (sp.getBoolean("isfirst", true)) {
+			creatShortCut();	
 		}
 
 	}
@@ -357,11 +357,27 @@ public class WelcomeActivity extends Activity {
 		}.start();
 
 	}
-	//开起来电归属地
-	public void openLocation(){
-		Intent service=new Intent(this,CallLocationService.class);
+
+	// 开起来电归属地
+	public void openLocation() {
+		Intent service = new Intent(this, CallLocationService.class);
 		startService(service);
 	}
 
+	// 第一次开启创建图标
+	private void creatShortCut() {
+		Intent intent = new Intent();
+		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
+		// 干什么事长什么样叫什么名
+		Intent shortcutIntent = new Intent();
+		intent.putExtra("duplicate", false);
+		shortcutIntent.setAction("com.limxing.shortcut");
+		shortcutIntent.addCategory(Intent.CATEGORY_DEFAULT);
+		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
+		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "黑马大卫士");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+				BitmapFactory.decodeResource(getResources(), R.drawable.app));
+		sendBroadcast(intent);
+	}
 
 }

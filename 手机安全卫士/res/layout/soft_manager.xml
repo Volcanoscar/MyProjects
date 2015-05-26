@@ -56,11 +56,12 @@
         android:background="#ffffff" >
 
         <RelativeLayout
+            android:id="@+id/soft_manager_loading"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent"
+            android:visibility="visible" >
 
             <LinearLayout
-                android:id="@+id/callsafe_main_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -79,7 +80,7 @@
         </RelativeLayout>
 
         <ListView
-            android:id="@+id/callsafe_main_lv"
+            android:id="@+id/soft_manager_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </ListView>

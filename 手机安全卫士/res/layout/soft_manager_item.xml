@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
-    <ImageView
-        android:id="@+id/soft_manager_item_tv_icon"
-        android:layout_width="64dip"
-        android:layout_height="64dip"
-        android:src="@drawable/app" />
+    android:layout_height="wrap_content" >
 
     <ImageView
         android:layout_width="fill_parent"
@@ -16,16 +10,7 @@
         android:src="@drawable/list_devider" />
 
     <TextView
-        android:id="@+id/soft_manager_item_tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/soft_manager_item_tv_icon"
-        android:paddingTop="5dip"
-        android:text="我是程序名称"
-        android:textSize="20sp" />
-
-    <TextView
+        android:id="@+id/soft_manager_item_tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/soft_manager_item_tv_name"
@@ -33,5 +18,35 @@
         android:paddingTop="5dip"
         android:text="我是存储位置"
         android:textColor="#90000000" />
+
+    <TextView
+        android:id="@+id/soft_manager_item_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_alignTop="@+id/soft_manager_item_tv_icon"
+        android:layout_toRightOf="@+id/soft_manager_item_tv_icon"
+        android:paddingTop="5dip"
+        android:text="我是程序名称"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/soft_manager_item_tv_icon"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/app" />
+
+    <TextView
+        android:id="@+id/soft_manager_item_tv_memory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dip"
+        android:text="我是占用空间"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

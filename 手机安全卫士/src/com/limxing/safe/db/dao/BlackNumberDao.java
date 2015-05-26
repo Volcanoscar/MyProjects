@@ -25,6 +25,7 @@ public class BlackNumberDao {
 		values.put("number", number);
 		values.put("mode", mode);
 		long rowid = db.insert("blackinfo", null, values);
+		db.close();
 		if (rowid == -1) {
 			return false;
 		} else {
@@ -37,6 +38,7 @@ public class BlackNumberDao {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		int rownumber = db.delete("blackinfo", "number=?",
 				new String[] { number });
+		db.close();
 		if (rownumber == 0) {
 			return false;
 		} else {
@@ -48,6 +50,7 @@ public class BlackNumberDao {
 	public boolean deleteAll() {
 		SQLiteDatabase db = helper.getWritableDatabase();
 		int rownumber = db.delete("blackinfo", null, null);
+		db.close();
 		if (rownumber == 0) {
 			return false;
 		} else {
@@ -62,6 +65,7 @@ public class BlackNumberDao {
 		values.put("mode", newMode);
 		int rownumber = db.update("blackinfo", values, "number=?",
 				new String[] { number });
+		db.close();
 		if (rownumber == 0) {
 			return false;
 		} else {
@@ -116,6 +120,8 @@ public class BlackNumberDao {
 					cursor.getString(1));
 			list.add(bk);
 		}
+		cursor.close();
+		db.close();
 		return list;
 	}
 

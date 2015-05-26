@@ -11,6 +11,22 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+/**
+ * 
+ * 版权：李利锋个人版权所有
+ * 
+ * 版本：1.0
+ * 
+ * 作者：李利锋
+ * 
+ * 创建日期：2015-5-26 下午9:11:26
+ * 
+ * 描述：这是获取手机里面所有应用程序信息的工具类，他依赖一个javaBean类
+ * 
+ * 
+ * 修订历史：
+ * 
+ */
 
 public class AppInfoParser {
 	/**

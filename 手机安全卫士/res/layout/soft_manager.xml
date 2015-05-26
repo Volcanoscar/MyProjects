@@ -79,11 +79,19 @@
             </LinearLayout>
         </RelativeLayout>
 
+       
+
         <ListView
             android:id="@+id/soft_manager_lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
         </ListView>
+         <TextView
+            android:id="@+id/soft_manager_tv_float"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            android:text="用户应用：10个" />
     </FrameLayout>
 
 </LinearLayout>

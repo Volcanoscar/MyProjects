@@ -29,6 +29,7 @@
         android:layout_toRightOf="@+id/soft_manager_item_tv_icon"
         android:paddingTop="5dip"
         android:text="我是程序名称"
+        android:layout_toLeftOf="@+id/soft_manager_item_tv_memory"
         android:textSize="20sp" />
 
     <ImageView

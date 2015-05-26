@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -11,6 +12,8 @@ import android.os.Message;
 import android.text.format.Formatter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,6 +31,9 @@ import com.limxing.safe.utils.SystemInfoUtils;
  * 描述：这是软件管家的Activity操作类
  */
 public class SoftManager extends Activity {
+	private int userSoftSize;
+	private int systemSoftSize;
+	private TextView soft_manager_tv_float;
 	private TextView soft_manager_tv_memory;
 	private TextView soft_manager_sd;
 	private ListView soft_manager_lv;
@@ -66,6 +72,32 @@ public class SoftManager extends Activity {
 		soft_manager_sd = (TextView) findViewById(R.id.soft_manager_sd);
 		soft_manager_loading = (RelativeLayout) findViewById(R.id.soft_manager_loading);
 		soft_manager_lv = (ListView) findViewById(R.id.soft_manager_lv);
+		soft_manager_tv_float = (TextView) findViewById(R.id.soft_manager_tv_float);
+		/*
+		 * 作者：Limxing 时间： 2015-5-26 下午8:02:47
+		 * 
+		 * 描述：ListView触摸事件，实现漂浮
+		 */
+		soft_manager_lv.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount) {
+				if(firstVisibleItem<=userSoftSize){
+					soft_manager_tv_float.setText("用户应用："+userSoftSize+"个");
+				}else{
+					soft_manager_tv_float.setText("系统应用："+systemSoftSize+"个");
+				}
+				
+			}
+		});
+
 	}
 
 	// 查询已安装的app并放入集合中
@@ -82,6 +114,8 @@ public class SoftManager extends Activity {
 						systemSofts.add(info);
 					}
 				}
+				userSoftSize=userSofts.size();
+				systemSoftSize=systemSofts.size();
 				handler.sendEmptyMessage(0);
 
 			};
@@ -98,11 +132,29 @@ public class SoftManager extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			/*
+			 * 作者：Limxing 时间： 2015-5-26 下午7:46:04
+			 * 
+			 * 描述：增加分别显示用户和系统的应用
+			 */
+			if (position == 0) {
+				TextView view = new TextView(SoftManager.this);
+				view.setText("用户应用：" + userSoftSize + "个");
+				view.setBackgroundColor(Color.GRAY);
+				return view;
+			}
+			if (position == userSofts.size() + 1) {
+				TextView view = new TextView(SoftManager.this);
+				view.setText("系统应用：" + systemSoftSize + "个");
+				view.setBackgroundColor(Color.GRAY);
+				return view;
+			}
+
 			AppInfo appinfo;
-			if (position < userSofts.size()) {
-				appinfo = userSofts.get(position);
+			if (position < userSoftSize + 1) {
+				appinfo = userSofts.get(position - 1);
 			} else {
-				appinfo = systemSofts.get(position - userSofts.size());
+				appinfo = systemSofts.get(position - userSoftSize - 1 - 1);
 			}
 			View view;
 			ViewHolder holder = new ViewHolder();

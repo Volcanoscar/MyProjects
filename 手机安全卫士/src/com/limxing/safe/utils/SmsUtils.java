@@ -158,6 +158,7 @@ public class SmsUtils {
 				}
 				type = parser.next();
 			}
+			fis.close();
 			return true;
 		} else {
 			throw new FileNotFoundException("没有可还原的数据");

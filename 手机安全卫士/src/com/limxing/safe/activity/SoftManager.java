@@ -437,11 +437,13 @@ public class SoftManager extends Activity implements OnClickListener {
 	/*
 	 * 作者：Limxing 时间： 2015-5-26 下午11:10:53
 	 * 
-	 * 描述：程序退出时，关闭相关的窗口等
+	 * 描述：程序退出时，关闭相关的窗口等:5-27添加了退出时关闭广播接受者
 	 */
 	@Override
 	protected void onDestroy() {
 		dismissPopupWindow();
+		unregisterReceiver(receiver);
+		receiver=null;
 		super.onDestroy();
 	}
 

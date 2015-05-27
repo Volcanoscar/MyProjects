@@ -9,7 +9,22 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-
+/**
+ * 
+ * 版权：李利锋个人版权所有
+ * 
+ * 版本：1.0
+ * 
+ * 作者：李利锋
+ * 
+ * 创建日期：忘记
+ * 
+ * 描述：获取手机里面所有联系人
+ * 
+ * 
+ * 修订历史：
+ * 
+ */
 public class ContactInfoUtils {
 
 	public static List<ContactInfo> getAllContactInfos(Context context) {

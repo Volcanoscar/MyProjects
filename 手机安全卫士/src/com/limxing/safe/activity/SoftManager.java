@@ -143,6 +143,7 @@ public class SoftManager extends Activity implements OnClickListener {
 				if (obj != null && obj instanceof AppInfo) {
 					// 为点击事件传递对象
 					clickedAppInfo = (AppInfo) obj;
+					//开始创建popupwindowView
 					View popuView = View.inflate(getApplicationContext(),
 							R.layout.soft_manager_popup_item, null);
 					ll_uninstall = (LinearLayout) popuView
@@ -157,7 +158,7 @@ public class SoftManager extends Activity implements OnClickListener {
 					ll_start.setOnClickListener(SoftManager.this);
 					ll_share.setOnClickListener(SoftManager.this);
 					ll_setting.setOnClickListener(SoftManager.this);
-					// 关闭其他条目的气泡
+					// 关闭其他条目的气泡(当气泡存在时)
 					dismissPopupWindow();
 					popupwindow = new PopupWindow(popuView, -2, -2);
 					// 动画播放有一个前提条件： 窗体必须要有背景资源。 如果窗体没有背景，动画就播放不出来。
@@ -422,13 +423,10 @@ public class SoftManager extends Activity implements OnClickListener {
 					RootTools.sendShell("rm -r" + clickedAppInfo.getApppack(),
 							3000);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (RootToolsException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (TimeoutException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

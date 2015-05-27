@@ -49,6 +49,8 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                
+                
             </intent-filter>
         </activity>
         <activity android:name="com.limxing.safe.MainActivity" >
@@ -56,6 +58,7 @@
                 <action android:name="com.limxing.shortcut"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+           
         </activity>
         <activity android:name="com.limxing.safe.activity.LostFindActivity" >
         </activity>
@@ -78,6 +81,8 @@
         <activity android:name="com.limxing.safe.activity.ToolLocationActivity" >
         </activity>
          <activity android:name="com.limxing.safe.activity.SoftManager" >
+        </activity>
+        <activity android:name="com.limxing.safe.activity.ToolAppLockActivity" >
         </activity>
 
         <receiver android:name="com.limxing.safe.receivers.BootCompleteReceiver" >

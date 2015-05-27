@@ -6,7 +6,7 @@
 
     <TextView
         style="@style/setTop"
-        android:layout_height="25dip" />
+        android:layout_height="5dip" />
 
     <RelativeLayout style="@style/setTop" >
 
@@ -72,6 +72,22 @@
         android:gravity="center_vertical"
         android:padding="10dip"
         android:text="短信还原"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/list_devider" />
+
+    <TextView
+        android:id="@+id/tools_tv_applock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_selector"
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:gravity="center_vertical"
+        android:padding="10dip"
+        android:text="程序锁"
         android:textSize="20sp" />
 
     <ImageView

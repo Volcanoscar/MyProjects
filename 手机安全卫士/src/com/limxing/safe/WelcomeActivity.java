@@ -294,7 +294,7 @@ public class WelcomeActivity extends Activity {
 			openLocation();
 		}
 		if (sp.getBoolean("isfirst", true)) {
-			creatShortCut();	
+			creatShortCut();
 		}
 
 	}

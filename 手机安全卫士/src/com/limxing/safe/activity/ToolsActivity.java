@@ -22,6 +22,7 @@ public class ToolsActivity extends Activity {
 	private TextView tools_tv_location;
 	private TextView tools_tv_smsBackup;
 	private TextView tools_tv_smsRestor;
+	private TextView tools_tv_applock;
 	private ProgressDialog pd;
 
 	@Override
@@ -36,7 +37,8 @@ public class ToolsActivity extends Activity {
 		tools_tv_location = (TextView) findViewById(R.id.tools_tv_location);
 		tools_tv_smsBackup = (TextView) findViewById(R.id.tools_tv_smsBackup);
 		tools_tv_smsRestor = (TextView) findViewById(R.id.tools_tv_smsRestor);
-
+		tools_tv_applock = (TextView) findViewById(R.id.tools_tv_applock);
+		
 	}
 
 	private void init() {
@@ -132,6 +134,15 @@ public class ToolsActivity extends Activity {
 
 					}
 				}.start();
+			}
+		});
+		tools_tv_applock.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(ToolsActivity.this,ToolAppLockActivity.class);
+				startActivity(intent);
+				
 			}
 		});
 	}

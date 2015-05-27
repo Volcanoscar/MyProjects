@@ -13,8 +13,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">#8800ff00</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:paddingTop">15dip</item>
-        <item name="android:paddingBottom">15dip</item>
+        <item name="android:paddingTop">5dip</item>
+        <item name="android:paddingBottom">5dip</item>
         <item name="android:textStyle">bold</item>
     </style>
 </resources>

@@ -6,7 +6,7 @@
 
     <TextView
         style="@style/setTop"
-        android:layout_height="25dip" />
+        android:layout_height="5dip" />
 
     <RelativeLayout style="@style/setTop" >
 

@@ -339,16 +339,16 @@ public class SoftManager extends Activity implements OnClickListener {
 
 	// 获取内存信息
 	public void getMemory() {
-		long total = SystemInfoUtils.getTotalMem();
+//		long total = SystemInfoUtils.getTotalMem();
 		long free = SystemInfoUtils.getAvailMem(getApplicationContext());
-		soft_manager_tv_memory.setText("内存信息："
+		soft_manager_tv_memory.setText("可用内存："
 				+ Formatter.formatShortFileSize(this, free));
 
 	}
 
 	// 获取sd卡信息
 	public void getSd() {
-		long total = Environment.getExternalStorageDirectory().getTotalSpace();
+//		long total = Environment.getExternalStorageDirectory().getTotalSpace();
 		long free = Environment.getExternalStorageDirectory().getFreeSpace();
 		soft_manager_sd.setText("SD卡信息："
 				+ Formatter.formatShortFileSize(this, free));
@@ -456,7 +456,7 @@ public class SoftManager extends Activity implements OnClickListener {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			String info = intent.getData().toString();
+//			String info = intent.getData().toString();
 			findSoft();
 
 		}

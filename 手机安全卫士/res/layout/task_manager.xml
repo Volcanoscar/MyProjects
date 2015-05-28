@@ -6,7 +6,7 @@
 
     <TextView
         style="@style/setTop"
-        android:layout_height="25dip" />
+        android:layout_height="5dip" />
 
     <RelativeLayout style="@style/setTop" >
 
@@ -53,6 +53,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:layout_weight="100"
         android:background="#ffffff" >
 
         <RelativeLayout
@@ -92,5 +93,39 @@
             android:background="@android:color/darker_gray"
             android:text="正在获取信息..." />
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:onClick="clear"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="清理" />
+        <Button
+            android:onClick="allClick"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="全选" />
+        <Button
+            android:onClick="reClick"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="反选" />
+        <Button
+            android:onClick="set"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:text="设置" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -8,6 +8,14 @@ public class TaskInfo {
 	private Drawable icon;
 	private String appname;
 	private boolean usertask;
+	private boolean isChecked;
+	
+	public boolean isChecked() {
+		return isChecked;
+	}
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
 	public String getPackname() {
 		return packname;
 	}

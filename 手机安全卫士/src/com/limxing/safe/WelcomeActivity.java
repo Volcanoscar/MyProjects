@@ -38,6 +38,7 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.limxing.safe.service.CallLocationService;
 import com.limxing.safe.service.CallSafeService;
+import com.limxing.safe.service.DogService;
 import com.limxing.safe.utils.StreamUtils;
 import com.limxing.safe.utils.ToastUtils;
 
@@ -296,6 +297,9 @@ public class WelcomeActivity extends Activity {
 		if (sp.getBoolean("isfirst", true)) {
 			creatShortCut();
 		}
+		if (sp.getBoolean("isDog", false)) {
+			openDog();
+		}
 
 	}
 
@@ -361,6 +365,12 @@ public class WelcomeActivity extends Activity {
 	// 开起来电归属地
 	public void openLocation() {
 		Intent service = new Intent(this, CallLocationService.class);
+		startService(service);
+	}
+
+	// 开启程序锁服务
+	public void openDog() {
+		Intent service = new Intent(this, DogService.class);
 		startService(service);
 	}
 

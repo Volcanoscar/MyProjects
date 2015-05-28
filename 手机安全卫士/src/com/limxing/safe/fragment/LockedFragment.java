@@ -103,8 +103,8 @@ public class LockedFragment extends Fragment {
 							Animation.RELATIVE_TO_SELF, 0);
 					ta.setDuration(300);
 					view.startAnimation(ta);
-					new Thread(){
-						public void run(){
+					new Thread() {
+						public void run() {
 							try {
 								Thread.sleep(250);
 							} catch (InterruptedException e) {
@@ -112,18 +112,24 @@ public class LockedFragment extends Fragment {
 								e.printStackTrace();
 							}
 							getActivity().runOnUiThread(new Runnable() {
-								
+
 								@Override
 								public void run() {
-									dao.delete(lockedAppInfos.get(position).getApppack());
-									lockedAppInfos.remove(position);
-									adapter.notifyDataSetChanged();
+									//解决连续双击，崩溃的问题
+									try {
+										dao.delete(lockedAppInfos.get(position)
+												.getApppack());
+										lockedAppInfos.remove(position);
+										adapter.notifyDataSetChanged();
+									} catch (IndexOutOfBoundsException e) {
+
+									}
 								}
 							});
-							
+
 						}
 					}.start();
-					
+
 				}
 			});
 			return view;

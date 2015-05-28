@@ -23,6 +23,7 @@ import com.limxing.safe.activity.CallSafe;
 import com.limxing.safe.activity.LostFindActivity;
 import com.limxing.safe.activity.SetActivity;
 import com.limxing.safe.activity.SoftManager;
+import com.limxing.safe.activity.TaskManager;
 import com.limxing.safe.activity.ToolsActivity;
 import com.limxing.safe.utils.Md5Utils;
 import com.limxing.safe.utils.ToastUtils;
@@ -78,6 +79,8 @@ public class MainActivity extends Activity {
 					startActivity(intent);
 					break;
 				case 3:
+					intent = new Intent(MainActivity.this, TaskManager.class);
+					startActivity(intent);
 					break;
 				case 4:
 					break;

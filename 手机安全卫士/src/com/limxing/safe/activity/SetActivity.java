@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.limxing.safe.R;
 import com.limxing.safe.service.CallLocationService;
 import com.limxing.safe.service.CallSafeService;
+import com.limxing.safe.service.DogService;
 import com.limxing.safe.ui.SetItem;
 import com.limxing.safe.utils.SystemInfoUtils;
 
@@ -23,11 +24,13 @@ public class SetActivity extends Activity {
 	private com.limxing.safe.ui.SetItem set_main_si_update;
 	private com.limxing.safe.ui.SetItem set_main_si_black;
 	private com.limxing.safe.ui.SetItem set_main_si_address;
+	private com.limxing.safe.ui.SetItem set_main_si_dog;
 	private TextView set_main_location_skin;
 	private RelativeLayout set_main_location_rl;
 	private SharedPreferences sp;
 	private boolean isUpdate;
 	private boolean isBlack;
+	private boolean isDog;
 	private boolean isAddress;
 	private String[] styles = { "半透明", "活力橙", "卫士蓝", "金属灰", "苹果绿" };
 
@@ -45,11 +48,13 @@ public class SetActivity extends Activity {
 		set_main_si_update = (SetItem) findViewById(R.id.set_main_si_update);
 		set_main_si_black = (SetItem) findViewById(R.id.set_main_si_black);
 		set_main_si_address = (SetItem) findViewById(R.id.set_main_si_address);
+		set_main_si_dog = (SetItem) findViewById(R.id.set_main_si_dog);
 		set_main_location_skin = (TextView) findViewById(R.id.set_main_location_skin);
 		set_main_location_rl = (RelativeLayout) findViewById(R.id.set_main_location_rl);
 		isUpdate = sp.getBoolean("isUpdate", true);
 		isBlack = sp.getBoolean("isBlack", true);
 		isAddress = sp.getBoolean("isAddress", true);
+		isDog = sp.getBoolean("isDog", false);
 		set_main_location_skin.setText(styles[sp.getInt("skin", 0)]);
 		set_main_location_rl.setOnClickListener(new OnClickListener() {
 
@@ -65,6 +70,37 @@ public class SetActivity extends Activity {
 		checkUpdate();
 		checkBlack();
 		checkAddress();
+		checkDog();
+
+	}
+
+	// 判断是否开启了程序锁服务
+	private void checkDog() {
+		set_main_si_dog.changeCheckState(isDog);
+		set_main_si_dog.setOnClickListener(new OnClickListener() {
+			private Intent dogIntent = new Intent(SetActivity.this,
+					DogService.class);
+
+			@Override
+			public void onClick(View v) {
+				Editor editor = sp.edit();
+				if (isDog) {
+					isDog = false;
+					set_main_si_dog.changeCheckState(false);
+					editor.putBoolean("isDog", false);
+					stopService(dogIntent);
+
+				} else {
+					isDog = true;
+					set_main_si_dog.changeCheckState(true);
+					editor.putBoolean("isDog", true);
+					startService(dogIntent);
+
+				}
+				editor.commit();
+			}
+		});
+
 
 	}
 
@@ -133,6 +169,8 @@ public class SetActivity extends Activity {
 				"com.limxing.safe.service.CallSafeService");
 		isAddress = SystemInfoUtils.isServiceRunning(this,
 				"com.limxing.safe.service.CallLocationService");
+		isDog = SystemInfoUtils.isServiceRunning(this,
+				"com.limxing.safe.service.DogService");
 		super.onStart();
 	}
 

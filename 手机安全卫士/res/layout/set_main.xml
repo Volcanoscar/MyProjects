@@ -84,6 +84,14 @@
                     android:src="@drawable/image_location_selector" />
 
             </RelativeLayout>
+            <com.limxing.safe.ui.SetItem
+                android:background="@drawable/item_selector"
+                android:id="@+id/set_main_si_dog"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                limxing:desc="程序锁已开启#程序锁已关闭"
+                limxing:title="是否开启程序锁" >
+            </com.limxing.safe.ui.SetItem>
         </LinearLayout>
     </ScrollView>
 

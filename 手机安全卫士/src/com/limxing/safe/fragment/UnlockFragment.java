@@ -115,10 +115,15 @@ public class UnlockFragment extends Fragment {
 
 								@Override
 								public void run() {
-									dao.add(unlockAppInfos.get(position)
-											.getApppack());
-									unlockAppInfos.remove(position);
-									adapter.notifyDataSetChanged();
+									// 解决连续双击，崩溃的问题
+									try {
+										dao.add(unlockAppInfos.get(position)
+												.getApppack());
+										unlockAppInfos.remove(position);
+										adapter.notifyDataSetChanged();
+									} catch (IndexOutOfBoundsException e) {
+
+									}
 								}
 							});
 

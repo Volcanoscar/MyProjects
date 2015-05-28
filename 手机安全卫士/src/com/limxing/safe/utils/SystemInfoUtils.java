@@ -10,8 +10,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.MemoryInfo;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
-import android.provider.ContactsContract.Contacts;
-
 public class SystemInfoUtils {
 	// 判断程序是否在运行
 	public static boolean isServiceRunning(Context context, String className) {

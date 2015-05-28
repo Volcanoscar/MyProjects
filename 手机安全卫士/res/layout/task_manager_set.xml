@@ -37,5 +37,11 @@
         android:layout_marginLeft="10dip"
         android:layout_height="wrap_content"
         android:text="是否显示系统进程" />
+    <CheckBox
+        android:id="@+id/task_manager_set_cb_clear"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_height="wrap_content"
+        android:text="是否开启锁屏清理后台进程" />
 
 </LinearLayout>

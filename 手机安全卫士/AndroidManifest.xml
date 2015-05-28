@@ -124,6 +124,8 @@
         </service>
         <service android:name="com.limxing.safe.service.DogService" >
         </service>
+         <service android:name="com.limxing.safe.service.ClearService" >
+        </service>
     </application>
 
 </manifest>

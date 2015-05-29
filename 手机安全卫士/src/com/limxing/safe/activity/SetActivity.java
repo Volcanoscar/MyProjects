@@ -101,7 +101,6 @@ public class SetActivity extends Activity {
 			}
 		});
 
-
 	}
 
 	// 判断是否开启了归属地显示
@@ -215,6 +214,11 @@ public class SetActivity extends Activity {
 				});
 		builder.show();
 
+	}
+
+	// 返回按键的事件
+	public void back(View view) {
+		onBackPressed();
 	}
 
 }

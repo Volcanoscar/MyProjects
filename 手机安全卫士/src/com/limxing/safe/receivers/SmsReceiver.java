@@ -3,6 +3,7 @@ package com.limxing.safe.receivers;
 import com.limxing.safe.R;
 import com.limxing.safe.service.LocationService;
 
+import android.app.PendingIntent;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;

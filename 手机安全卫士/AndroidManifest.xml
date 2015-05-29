@@ -127,6 +127,9 @@
         <service android:name="com.limxing.safe.service.CallLocationService" >
         </service>
         <service android:name="com.limxing.safe.service.DogService" >
+            <intent-filter >
+                <action android:name="com.limxing.safe.dogservice"/>
+            </intent-filter>
         </service>
         <service android:name="com.limxing.safe.service.ClearService" >
         </service>

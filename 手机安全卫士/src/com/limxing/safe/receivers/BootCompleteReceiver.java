@@ -1,5 +1,7 @@
 package com.limxing.safe.receivers;
 
+import com.limxing.safe.service.DogService;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -25,13 +27,12 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
 			}
 		}
-		// 开启程序锁服务
+		// 开启程序锁服务，显式隐式都可以启动一个服务
 		if (sp.getBoolean("isDog", false)) {
+//			Intent service = new Intent(context,DogService.class);
 			Intent service = new Intent();
-			service.setAction("com.limxing.safe.service.DogService");
-			System.out.println(222);
+			service.setAction("com.limxing.safe.dogservice");
 			context.startService(service);
-			System.out.println(333);
 		}
 	}
 

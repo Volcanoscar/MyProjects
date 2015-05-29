@@ -297,9 +297,7 @@ public class WelcomeActivity extends Activity {
 		if (sp.getBoolean("isfirst", true)) {
 			creatShortCut();
 		}
-		if (sp.getBoolean("isDog", false)) {
-			openDog();
-		}
+		
 
 	}
 
@@ -368,11 +366,7 @@ public class WelcomeActivity extends Activity {
 		startService(service);
 	}
 
-	// 开启程序锁服务
-	public void openDog() {
-		Intent service = new Intent(this, DogService.class);
-		startService(service);
-	}
+	
 
 	// 第一次开启创建图标
 	private void creatShortCut() {

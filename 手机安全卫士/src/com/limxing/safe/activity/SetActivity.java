@@ -38,7 +38,7 @@ public class SetActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initUI();
-		init();
+		
 
 	}
 
@@ -52,9 +52,9 @@ public class SetActivity extends Activity {
 		set_main_location_skin = (TextView) findViewById(R.id.set_main_location_skin);
 		set_main_location_rl = (RelativeLayout) findViewById(R.id.set_main_location_rl);
 		isUpdate = sp.getBoolean("isUpdate", true);
-		isBlack = sp.getBoolean("isBlack", true);
-		isAddress = sp.getBoolean("isAddress", true);
-		isDog = sp.getBoolean("isDog", false);
+		// isBlack = sp.getBoolean("isBlack", true);
+		// isAddress = sp.getBoolean("isAddress", true);
+		// isDog = sp.getBoolean("isDog", false);
 		set_main_location_skin.setText(styles[sp.getInt("skin", 0)]);
 		set_main_location_rl.setOnClickListener(new OnClickListener() {
 
@@ -66,7 +66,6 @@ public class SetActivity extends Activity {
 	}
 
 	public void init() {
-
 		checkUpdate();
 		checkBlack();
 		checkAddress();
@@ -170,6 +169,7 @@ public class SetActivity extends Activity {
 				"com.limxing.safe.service.CallLocationService");
 		isDog = SystemInfoUtils.isServiceRunning(this,
 				"com.limxing.safe.service.DogService");
+		init();
 		super.onStart();
 	}
 

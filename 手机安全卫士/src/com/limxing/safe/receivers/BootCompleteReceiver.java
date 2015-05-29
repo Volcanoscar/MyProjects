@@ -25,6 +25,14 @@ public class BootCompleteReceiver extends BroadcastReceiver {
 
 			}
 		}
+		// 开启程序锁服务
+		if (sp.getBoolean("isDog", false)) {
+			Intent service = new Intent();
+			service.setAction("com.limxing.safe.service.DogService");
+			System.out.println(222);
+			context.startService(service);
+			System.out.println(333);
+		}
 	}
 
 }

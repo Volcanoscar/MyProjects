@@ -44,16 +44,29 @@ public class LockedFragment extends Fragment {
 	public void onStart() {
 		dao = new AppLockDao(getActivity());
 		lockedAppInfos = new ArrayList<AppInfo>();
-		List<AppInfo> appInfos = AppInfoParser.getAppInfos(getActivity());
-		for (AppInfo info : appInfos) {
-			if (dao.exist(info.getApppack())) {
-				lockedAppInfos.add(info);
-			} else {
+		new Thread() {
+			public void run() {
+				List<AppInfo> appInfos = AppInfoParser
+						.getAppInfos(getActivity());
+				for (AppInfo info : appInfos) {
+					if (dao.exist(info.getApppack())) {
+						lockedAppInfos.add(info);
+					} else {
+
+					}
+				}
+				getActivity().runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						adapter = new MyAdapter();
+						fragment_locked_lv.setAdapter(adapter);
+
+					}
+				});
 
 			}
-		}
-		adapter = new MyAdapter();
-		fragment_locked_lv.setAdapter(adapter);
+		}.start();
 
 		super.onStart();
 	}
@@ -115,7 +128,7 @@ public class LockedFragment extends Fragment {
 
 								@Override
 								public void run() {
-									//解决连续双击，崩溃的问题
+									// 解决连续双击，崩溃的问题
 									try {
 										dao.delete(lockedAppInfos.get(position)
 												.getApppack());

@@ -297,8 +297,17 @@ public class WelcomeActivity extends Activity {
 		if (sp.getBoolean("isfirst", true)) {
 			creatShortCut();
 		}
+		if (sp.getBoolean("isDog", true)) {
+			openDogService();
+		}
 		
 
+	}
+
+	private void openDogService() {
+		Intent intent=new Intent(this,DogService.class);
+		startService(intent);
+		
 	}
 
 	// 开启黑名单服务

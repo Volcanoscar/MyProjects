@@ -95,7 +95,7 @@ public class TaskManager extends Activity {
 	 */
 	private void init() {
 		// 得到内存信息
-		 free = SystemInfoUtils.getAvailMem(this);
+		free = SystemInfoUtils.getAvailMem(this);
 		// long total = SystemInfoUtils.getTotalMem();
 		task_manager_memory.setText("可用内存："
 				+ Formatter.formatFileSize(this, free));
@@ -354,10 +354,12 @@ public class TaskManager extends Activity {
 		// }
 		ToastUtils.showToast(TaskManager.this, "清理了" + count + "个进程，释放了"
 				+ Formatter.formatFileSize(TaskManager.this, savemem) + "内存");
+		count = 0;
+		savemem = 0;
 		int num = userTaskInfos.size() + systemTaskInfos.size();
 		task_manager_tv_number.setText("正在运行程序：" + num + "个");
 		task_manager_memory.setText("可用内存："
-				+ Formatter.formatFileSize(this, savemem+free));
+				+ Formatter.formatFileSize(this, savemem + free));
 		adapter.notifyDataSetChanged();
 		// init();
 

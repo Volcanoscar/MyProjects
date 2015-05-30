@@ -269,6 +269,7 @@ public class WelcomeActivity extends Activity {
 	public void init() {
 		sp = getSharedPreferences("info", MODE_PRIVATE);
 		copyDB("address.db");
+		copyDB("antivirus.db");
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);

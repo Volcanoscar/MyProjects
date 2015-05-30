@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.limxing.safe.activity.AntivirusActivity;
 import com.limxing.safe.activity.CallSafe;
 import com.limxing.safe.activity.LostFindActivity;
 import com.limxing.safe.activity.SetActivity;
@@ -85,6 +86,10 @@ public class MainActivity extends Activity {
 					break;
 				case 4:
 					intent = new Intent(MainActivity.this, TrafficActivity.class);
+					startActivity(intent);
+					break;
+				case 5:
+					intent = new Intent(MainActivity.this, AntivirusActivity.class);
 					startActivity(intent);
 					break;
 				case 7:

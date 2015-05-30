@@ -96,6 +96,10 @@
         </activity>
          <activity android:name="com.limxing.safe.activity.TrafficActivity" >
         </activity>
+         <activity android:name="com.limxing.safe.activity.AntivirusActivity" >
+        </activity>
+         
+         
 
         <receiver android:name="com.limxing.safe.receivers.BootCompleteReceiver" >
             <intent-filter>

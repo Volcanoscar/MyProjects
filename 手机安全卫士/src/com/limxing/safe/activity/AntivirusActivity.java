@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -127,7 +128,7 @@ public class AntivirusActivity extends Activity {
 					process++;
 					antivirus_main_pb.setProgress(process);
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -152,5 +153,9 @@ public class AntivirusActivity extends Activity {
 		flag = false;
 		super.onDestroy();
 	}
+
+//	public void back(View view) {
+//		onBackPressed();
+//	}
 
 }

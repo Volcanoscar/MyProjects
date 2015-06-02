@@ -36,6 +36,8 @@ import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+import com.limxing.safe.db.dao.AntivirusDao;
 import com.limxing.safe.service.CallLocationService;
 import com.limxing.safe.service.CallSafeService;
 import com.limxing.safe.service.DogService;
@@ -110,6 +112,52 @@ public class WelcomeActivity extends Activity {
 		}
 
 	};
+
+	/**
+	 * 查询数据库更新病毒数据库
+	 * 不知道怎么实现的
+	 */
+	public void updataVirtusDB() {
+		new Thread() {
+			public void run() {
+				if (AntivirusDao.isExist()) {
+					String versionNum = AntivirusDao.getDBVersion();
+					HttpUtils http = new HttpUtils();
+					String url = "http://192.168.17.30:8080/psb/UpdataInfoServlet?version="
+							+ versionNum;
+					http.send(HttpRequest.HttpMethod.GET, url,
+							new RequestCallBack<String>() {
+
+								@Override
+								public void onFailure(HttpException arg0,
+										String arg1) {
+									System.out.println("数据库更新失败");
+
+								}
+
+								@Override
+								public void onSuccess(ResponseInfo<String> info) {
+									try {
+										JSONObject obj = new JSONObject(
+												info.result);
+										String md5 = obj.getString("md5");
+										String desc = obj.getString("desc");
+										AntivirusDao.add(desc, md5);
+
+									} catch (JSONException e) {
+										System.out.println("数据库更新失败，002");
+										e.printStackTrace();
+									}
+
+								}
+
+							});
+				}
+
+			}
+		}.start();
+
+	}
 
 	/**
 	 * 多线程下载资源
@@ -269,7 +317,9 @@ public class WelcomeActivity extends Activity {
 	public void init() {
 		sp = getSharedPreferences("info", MODE_PRIVATE);
 		copyDB("address.db");
+		// 准备病毒数据库以及更新病毒数据库
 		copyDB("antivirus.db");
+		updataVirtusDB();
 		try {
 			PackageInfo pi = getPackageManager().getPackageInfo(
 					getPackageName(), 0);
@@ -301,14 +351,13 @@ public class WelcomeActivity extends Activity {
 		if (sp.getBoolean("isDog", true)) {
 			openDogService();
 		}
-		
 
 	}
 
 	private void openDogService() {
-		Intent intent=new Intent(this,DogService.class);
+		Intent intent = new Intent(this, DogService.class);
 		startService(intent);
-		
+
 	}
 
 	// 开启黑名单服务
@@ -375,8 +424,6 @@ public class WelcomeActivity extends Activity {
 		Intent service = new Intent(this, CallLocationService.class);
 		startService(service);
 	}
-
-	
 
 	// 第一次开启创建图标
 	private void creatShortCut() {

@@ -29,6 +29,8 @@ import com.limxing.safe.activity.ToolsActivity;
 import com.limxing.safe.activity.TrafficActivity;
 import com.limxing.safe.utils.Md5Utils;
 import com.limxing.safe.utils.ToastUtils;
+import com.startapp.android.publish.StartAppAd;
+import com.startapp.android.publish.StartAppSDK;
 
 public class MainActivity extends Activity {
 	private GridView gv_main_items;
@@ -49,6 +51,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		StartAppSDK.init(this, "105756043", "208401311", true);
 		setContentView(R.layout.activity_main);
 		sp = getSharedPreferences("info", MODE_PRIVATE);
 		gv_main_items = (GridView) findViewById(R.id.gv_main_items);
@@ -85,11 +88,13 @@ public class MainActivity extends Activity {
 					startActivity(intent);
 					break;
 				case 4:
-					intent = new Intent(MainActivity.this, TrafficActivity.class);
+					intent = new Intent(MainActivity.this,
+							TrafficActivity.class);
 					startActivity(intent);
 					break;
 				case 5:
-					intent = new Intent(MainActivity.this, AntivirusActivity.class);
+					intent = new Intent(MainActivity.this,
+							AntivirusActivity.class);
 					startActivity(intent);
 					break;
 				case 7:
@@ -240,6 +245,19 @@ public class MainActivity extends Activity {
 			return 0;
 		}
 
+	}
+
+	@Override
+	protected void onStart() {
+		gv_main_items.setAdapter(new MyAdapter());
+		super.onStart();
+	}
+
+	@Override
+	public void onBackPressed() {
+		StartAppAd saa = new StartAppAd(this);
+		saa.onBackPressed();
+		super.onBackPressed();
 	}
 
 }

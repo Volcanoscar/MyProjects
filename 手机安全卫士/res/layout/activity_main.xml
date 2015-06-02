@@ -4,11 +4,11 @@
     android:layout_height="fill_parent"
     android:background="#ffffffff"
     android:orientation="vertical" >
-     <TextView
+
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="5dip"
-        android:background="#50ffff00"
-         />
+        android:background="#50ffff00" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -20,6 +20,12 @@
         android:text="黑马·手机安全卫士"
         android:textSize="20.0sp"
         android:textStyle="bold" />
+
+    <com.startapp.android.publish.banner.Banner
+        android:id="@+id/startAppBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
 
     <com.limxing.safe.ui.FocusTextView
         android:layout_width="fill_parent"

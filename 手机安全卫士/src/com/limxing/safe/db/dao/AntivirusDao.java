@@ -41,7 +41,8 @@ public class AntivirusDao {
 	 * @return true´æÔÚ false²»´æÔÚ
 	 */
 	public static boolean isExist() {
-		File file = new File("/data/data/com.limxing.safe/files/antivirtus.db");
+		File file = new File("/data/data/com.limxing.safe/files/antivirus.db");
+		System.out.println(file.length());
 		return file.exists() && file.length() > 0;
 
 	}
@@ -53,7 +54,7 @@ public class AntivirusDao {
 	 */
 	public static String getDBVersion() {
 		SQLiteDatabase db = SQLiteDatabase.openDatabase(
-				"/data/data/com.limxing.safe/files/antivirtus.db", null,
+				"/data/data/com.limxing.safe/files/antivirus.db", null,
 				SQLiteDatabase.OPEN_READONLY);
 		String version = "0";
 		Cursor cursor = db.rawQuery("select subcnt from version", null);

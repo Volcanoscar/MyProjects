@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
-       <!--  <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item> -->
+        <!--
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        -->
     </style>
+
     <style name="SplashTheme" parent="@style/AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <style name="setTop">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -17,4 +22,17 @@
         <item name="android:paddingBottom">5dip</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="MyProgressBar" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progress_medium_white</item>
+        <item name="android:minWidth">60dip</item>
+        <item name="android:maxWidth">60dip</item>
+        <item name="android:minHeight">60dip</item>
+        <item name="android:maxHeight">60dip</item>
+    </style>
+
+    <style name="MyProgressBar_rizontal" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal</item>
+    </style>
+
 </resources>

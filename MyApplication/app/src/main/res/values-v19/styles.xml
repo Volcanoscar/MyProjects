@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="setTop">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">#80ff2222</item>
+        <item name="android:paddingTop">25dp</item>
+        <item name="android:paddingBottom">10dip</item>
+       <!-- <item name="android:gravity">center_vertical</item>-->
+    </style>
+
+
+</resources>

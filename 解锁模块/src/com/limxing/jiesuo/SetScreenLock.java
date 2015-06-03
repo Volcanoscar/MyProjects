@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +20,7 @@ import com.limxing.jiesuo.LockPatternView.DisplayMode;
 import com.limxing.jiesuo.LockPatternView.OnPatternListener;
 
 public class SetScreenLock extends Activity implements OnClickListener {
-
+	private Animation aa;
 	private LockPatternView lockPatternView;
 	private TextView tv_set_screen_lock;
 	private String pattern_first;
@@ -50,10 +52,16 @@ public class SetScreenLock extends Activity implements OnClickListener {
 
 		}
 
+		// Animation aa=AnimationUtils.loadAnimation(AppLockPwd.this,
+		// R.anim.shake);
+		// et_task_password.startAnimation(aa);
 		public void onPatternDetected(List<Cell> pattern) {
 			if (isFirst) {
 				if (pattern.size() < 4) {
+					aa = AnimationUtils.loadAnimation(SetScreenLock.this,
+							R.anim.shake);
 					tv_set_screen_lock.setText("至少绘制4个连接点,请重试");
+					tv_set_screen_lock.startAnimation(aa);
 					lockPatternView.setDisplayMode(DisplayMode.Wrong);
 					tv_set_screen_lock.setTextColor(Color.RED);
 					clear();
@@ -72,6 +80,9 @@ public class SetScreenLock extends Activity implements OnClickListener {
 					tv_set_screen_lock.setText("两次图案不同，请重新绘制");
 					lockPatternView.setDisplayMode(DisplayMode.Wrong);
 					tv_set_screen_lock.setTextColor(Color.RED);
+					aa = AnimationUtils.loadAnimation(SetScreenLock.this,
+							R.anim.shake);
+					tv_set_screen_lock.startAnimation(aa);
 					isFirst = true;
 					clear();
 					return;

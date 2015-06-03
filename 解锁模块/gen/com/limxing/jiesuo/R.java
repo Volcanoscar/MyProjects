@@ -8,6 +8,10 @@
 package com.limxing.jiesuo;
 
 public final class R {
+    public static final class anim {
+        public static final int cycle_7=0x7f040000;
+        public static final int shake=0x7f040001;
+    }
     public static final class attr {
         /**  Aspect to use when drawing LockPatternView. Choices are "square"(default), "lock_width"
              or "lock_height" 
@@ -27,8 +31,8 @@ containing a value of this type.
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int btn_code_lock_default_holo=0x7f020000;
@@ -41,13 +45,13 @@ containing a value of this type.
         public static final int indicator_code_lock_point_area_red_holo=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f080006;
-        public static final int lpv_lock=0x7f080000;
-        public static final int textView1=0x7f080003;
-        public static final int tv_delete_screen_lock=0x7f080001;
-        public static final int tv_screen_lock=0x7f080004;
-        public static final int tv_screen_lock_forget=0x7f080002;
-        public static final int tv_set_screen_lock=0x7f080005;
+        public static final int action_settings=0x7f090006;
+        public static final int lpv_lock=0x7f090000;
+        public static final int textView1=0x7f090003;
+        public static final int tv_delete_screen_lock=0x7f090001;
+        public static final int tv_screen_lock=0x7f090004;
+        public static final int tv_screen_lock_forget=0x7f090002;
+        public static final int tv_set_screen_lock=0x7f090005;
     }
     public static final class layout {
         public static final int activity_delete_screen_lock=0x7f030000;
@@ -55,23 +59,23 @@ containing a value of this type.
         public static final int activity_set_screen_lock=0x7f030002;
     }
     public static final class menu {
-        public static final int screen_lock=0x7f070000;
+        public static final int screen_lock=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
+        public static final int action_settings=0x7f060001;
+        public static final int app_name=0x7f060000;
         /**  Accessibility description sent when user adds a cell to the pattern. [CHAR LIMIT=NONE]  
          */
-        public static final int lockscreen_access_pattern_cell_added=0x7f050004;
+        public static final int lockscreen_access_pattern_cell_added=0x7f060004;
         /**  Accessibility description sent when the pattern times out and is cleared. [CHAR LIMIT=NONE] 
          */
-        public static final int lockscreen_access_pattern_cleared=0x7f050003;
+        public static final int lockscreen_access_pattern_cleared=0x7f060003;
         /**  Accessibility description sent when user completes drawing a pattern. [CHAR LIMIT=NONE] 
          */
-        public static final int lockscreen_access_pattern_detected=0x7f050005;
+        public static final int lockscreen_access_pattern_detected=0x7f060005;
         /**  Accessibility description sent when user starts drawing a lock pattern. [CHAR LIMIT=NONE] 
          */
-        public static final int lockscreen_access_pattern_start=0x7f050002;
+        public static final int lockscreen_access_pattern_start=0x7f060002;
     }
     public static final class style {
         /** 
@@ -95,11 +99,11 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
     public static final class styleable {
         /** Attributes that can be used with a LockPatternView.

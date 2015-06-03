@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import com.limxing.jiesuo.LockPatternView.OnPatternListener;
 
 public class DeleteScreenLock extends Activity implements OnClickListener {
 
+	private Animation aa;
 	private LockPatternView lockPatternView;
 	private LockPatternUtils lockPatternUtils;
 	private TextView tv_delete_screen_lock;
@@ -56,6 +59,9 @@ public class DeleteScreenLock extends Activity implements OnClickListener {
 				if (result == 0) {
 					tv_delete_screen_lock.setText("密码错误，请重试");
 					tv_delete_screen_lock.setTextColor(Color.RED);
+					aa = AnimationUtils.loadAnimation(DeleteScreenLock.this,
+							R.anim.shake);
+					tv_delete_screen_lock.startAnimation(aa);
 					wrongKey();
 				} else if (result == 1) {
 					//解锁成功，调用清密码

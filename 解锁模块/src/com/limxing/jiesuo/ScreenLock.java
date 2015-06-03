@@ -13,6 +13,8 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,7 @@ import com.limxing.jiesuo.LockPatternView.DisplayMode;
 import com.limxing.jiesuo.LockPatternView.OnPatternListener;
 
 public class ScreenLock extends Activity implements OnClickListener {
-
+	private Animation aa;
 	private LockPatternView lockPatternView;
 	private LockPatternUtils lockPatternUtils;
 	private TextView tv_screen_lock;
@@ -64,6 +66,9 @@ public class ScreenLock extends Activity implements OnClickListener {
 						locktime = locktime - 1;
 						tv_screen_lock.setText("密码错误，您还有" + locktime + "次机会");
 						tv_screen_lock.setTextColor(Color.RED);
+						aa = AnimationUtils.loadAnimation(ScreenLock.this,
+								R.anim.shake);
+						tv_screen_lock.startAnimation(aa);
 						wrongKey();
 					} else if (result == 1) {
 						Toast.makeText(ScreenLock.this, "解锁成功,欢迎进入投资啦",
@@ -102,7 +107,7 @@ public class ScreenLock extends Activity implements OnClickListener {
 
 	// 忘记密码以及密码次数没有，调用登陆界面并清除锁屏密码，锁屏状态为false，次数是在设置锁屏的地方恢复
 	public void forgetKey() {
-		Intent intent=new Intent(ScreenLock.this,SetScreenLock.class);
+		Intent intent = new Intent(ScreenLock.this, SetScreenLock.class);
 		startActivity(intent);
 		finish();
 	}
@@ -124,6 +129,7 @@ public class ScreenLock extends Activity implements OnClickListener {
 			}
 		}.start();
 	}
+
 	@Override
 	protected void onDestroy() {
 		Editor editor = sp.edit();

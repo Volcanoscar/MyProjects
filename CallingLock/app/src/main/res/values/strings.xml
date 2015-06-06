@@ -2,5 +2,7 @@
     <string name="app_name">CallingLock</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="statement">通话即时锁屏是通过检测手机通话状态进行屏幕的锁定，解决了通话时面部误触造成电话被挂断的情况。本软件通过一个通话状态的监听服务而进行的工作，请您设置允许开机自起以及免除被清理的状态。</string>
+    <string name="open_name">是否开启通话即时锁屏</string>
+    <string name="open_time">接通后几秒后锁定</string>
+    <string name="statement">通话即时锁屏是通过检测手机通话状态进行屏幕的锁定，解决了通话时面部误触造成电话被挂断的情况。本软件通过一个通话状态的监听服务而进行的工作，请您设置允许开机自启以及清理白名单的状态。</string>
 </resources>

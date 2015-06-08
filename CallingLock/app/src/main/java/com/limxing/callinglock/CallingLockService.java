@@ -108,6 +108,7 @@ public class CallingLockService extends Service {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (flag) {
+                System.out.print("11111222");
                 mWindowManager.addView(view, params);
             }
         }
@@ -115,6 +116,7 @@ public class CallingLockService extends Service {
 
 
     public void showToast() {
+        System.out.print("11111");
         final long time = times[sp.getInt("time", 1)];
 
         count = sp.getInt("count", 0);
@@ -149,12 +151,15 @@ public class CallingLockService extends Service {
         params = new WindowManager.LayoutParams();
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        //params.gravity = Gravity.LEFT + Gravity.TOP;
+        // params.gravity = Gravity.LEFT + Gravity.TOP;
         params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
         params.format = PixelFormat.TRANSLUCENT;
-        params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE; // 土司窗体天生不响应触摸事件
+        if (android.os.Build.MANUFACTURER.equals("Xiaomi")) {
+            params.type = WindowManager.LayoutParams.TYPE_TOAST;
+        } else {
+            params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE;
+        }
 //解决延时就挂断电话的bug
         flag = true;
         new Thread() {
@@ -164,7 +169,6 @@ public class CallingLockService extends Service {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 handler.sendEmptyMessage(0);
             }
 

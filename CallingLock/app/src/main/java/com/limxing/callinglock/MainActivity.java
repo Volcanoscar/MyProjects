@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
 public class MainActivity extends ActionBarActivity {
     private SharedPreferences sp;
     private boolean running;
@@ -26,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         sp = getSharedPreferences("info", MODE_PRIVATE);
         times = getResources().getStringArray(R.array.lockset_item);
         tv_time = (TextView) findViewById(R.id.tv_time);
-        tv_main_count= (TextView) findViewById(R.id.tv_main_count);
+        tv_main_count = (TextView) findViewById(R.id.tv_main_count);
         //使用说明的点击事件
         findViewById(R.id.tv_main).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
             startService(intent);
         }
         TextView tv_main_count = (TextView) findViewById(R.id.tv_main_count);
-        tv_main_count.setText(String.valueOf(getResources().getString(R.string.lanjie) + sp.getInt("count", 0)) + getResources().getString(R.string.time));
+
     }
 
     @Override
@@ -91,6 +90,7 @@ public class MainActivity extends ActionBarActivity {
             tv_time.setText(getResources().getString(R.string.close));
         }
         tv_time.setText(times[sp.getInt("time", 1)]);
+        tv_main_count.setText(String.valueOf(getResources().getString(R.string.lanjie) + sp.getInt("count", 0)) + getResources().getString(R.string.time));
         super.onStart();
     }
 

@@ -74,7 +74,7 @@ public class CallingLockService extends Service {
                 case TelephonyManager.CALL_STATE_IDLE:
                     if (view != null) {
                         try {
-                            flag=false;
+                            flag = false;
                             mWindowManager.removeView(view);
                             view = null;
                         } catch (Exception e) {
@@ -149,13 +149,14 @@ public class CallingLockService extends Service {
         params = new WindowManager.LayoutParams();
         params.height = WindowManager.LayoutParams.MATCH_PARENT;
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.gravity = Gravity.LEFT + Gravity.TOP;
+        //params.gravity = Gravity.LEFT + Gravity.TOP;
         params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
         params.format = PixelFormat.TRANSLUCENT;
-        params.type = WindowManager.LayoutParams.TYPE_TOAST; // 土司窗体天生不响应触摸事件
-
-        flag=true;
+        params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE; // 土司窗体天生不响应触摸事件
+//解决延时就挂断电话的bug
+        flag = true;
         new Thread() {
             public void run() {
                 try {

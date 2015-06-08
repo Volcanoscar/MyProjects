@@ -28,7 +28,7 @@ public class CountActivity extends ActionBarActivity {
                 intent.putExtra(
                         Intent.EXTRA_TEXT,
                         getResources().getString(R.string.sharecontent) +
-                                getSharedPreferences("info", MODE_PRIVATE).getInt("time", 0) + getResources()
+                                getSharedPreferences("info", MODE_PRIVATE).getInt("count", 0) + getResources()
                                 .getString(R.string.sharecontent1)
                                 + "https://play.google.com/store/apps/details?id=com.limxing.callinglock"
                                 );

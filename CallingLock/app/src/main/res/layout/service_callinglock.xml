@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:slider="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_callinglockservice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_callinglockservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="@string/title"
+        android:textSize="30sp" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_callinglockservice"
+
+        android:layout_centerHorizontal="true"
+        android:text="@string/desc"
+        android:textSize="10sp" />
+
+    <com.limxing.callinglock.SlideView
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg"
+        slider:maskText="@string/slider_text"
+        slider:maskTextSize="28sp"
+        slider:maskTextMarginLeft="108dp"
+        slider:maskTextMarginTop="60dp"
+        slider:slider="@drawable/arrow"
+        slider:sliderMarginLeft="22dp"
+        slider:sliderMarginTop="24dp"
+        slider:slidableLength="@dimen/slidable_length"
+        slider:effectiveLength="190dp"
+        slider:effectiveVelocity="1300dp"
+        />
+
+</RelativeLayout>

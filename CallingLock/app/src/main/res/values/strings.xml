@@ -2,7 +2,28 @@
     <string name="app_name">CallingLock</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="open_name">是否开启通话即时锁屏</string>
-    <string name="open_time">接通后几秒后锁定</string>
-    <string name="statement">通话即时锁屏是通过检测手机通话状态进行屏幕的锁定，解决了通话时面部误触造成电话被挂断的情况。本软件通过一个通话状态的监听服务而进行的工作，请您设置允许开机自启以及清理白名单的状态。</string>
+
+    <string name="slider_text">Slide to clean</string>
+
+    <string name="open_time">Lock in after a few seconds.</string>
+    <string name="statement">The instant lock screen is locked by detecting the status of the phone calls, and when the phone is hung, the face is caused by the wrong phone call.. This software is working with a call status monitoring service, and you can set the status of the starting and cleaning up the list..</string>
+    <string name="desc">Call instant lock screen, protect your call inadvertent hang</string>
+    <string name="title">Screen Locking</string>
+    <string name="instructions">Instruction</string>
+    <string name="close">Instant lock screen without the call</string>
+    <string name="timedelay">Choose One Delay Time</string>
+    <string name="quite">Press again to exit</string>
+    <string name="lanjie">There are </string>
+    <string name="time"> times accumulated when you touch wrongly</string>
+    <string name="count">Data statistics</string>
+    <string name="share">Share</string>
+    <string name="sharecontent">Call instant lock screen has helped me to intercept touch operation</string>
+    <string name="sharecontent1">times when calling.Download address:</string>
+    <string-array name="lockset_item">
+        <item>Immediately</item>
+        <item>3 seconds later</item>
+        <item>5 seconds later</item>
+        <item>10 seconds later</item>
+        <item>Off the instant lock screen</item>
+    </string-array>
 </resources>

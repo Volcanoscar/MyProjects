@@ -49,6 +49,7 @@
                 android:gravity="center_vertical">
 
                 <TextView
+                    android:id="@+id/tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/open_time"
@@ -60,9 +61,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tv"
                     android:text="3秒" />
             </RelativeLayout>
             <TextView
+                android:background="@drawable/item_selector"
                 android:id="@+id/tv_main_count"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

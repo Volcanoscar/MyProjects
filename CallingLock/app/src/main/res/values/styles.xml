@@ -8,8 +8,8 @@
     </style>
     <style name="setTop">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dip</item>
-        <item name="android:background">#1F7EFF</item>
+        <item name="android:layout_height">50dip</item>
+        <item name="android:background">#33cccc</item>
     </style>
 
 </resources>

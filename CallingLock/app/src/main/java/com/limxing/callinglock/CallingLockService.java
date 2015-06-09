@@ -14,8 +14,10 @@ import android.os.Message;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 /**
  * Created by limxing on 2015/6/5.
@@ -37,7 +39,7 @@ public class CallingLockService extends Service {
     public void onCreate() {
         Notification notification = new Notification(R.mipmap.ic_launcher, "limxing", System.currentTimeMillis());
         Intent intent = new Intent();
-        intent.setAction("ooo.aaa.bbb");
+        intent.setAction("com.limxing.calling");
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         PendingIntent contentIntnet = PendingIntent.getActivity(this, 0, intent, 0);
         notification.setLatestEventInfo(this, "limxing", "limxing", contentIntnet);
@@ -54,6 +56,7 @@ public class CallingLockService extends Service {
         mOutCallReceiver = new OutCallReceiver();
         registerReceiver(mOutCallReceiver, new IntentFilter(
                 Intent.ACTION_NEW_OUTGOING_CALL));
+
         super.onCreate();
     }
 
@@ -108,7 +111,6 @@ public class CallingLockService extends Service {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (flag) {
-                System.out.print("11111222");
                 mWindowManager.addView(view, params);
             }
         }
@@ -116,7 +118,6 @@ public class CallingLockService extends Service {
 
 
     public void showToast() {
-        System.out.print("11111");
         final long time = times[sp.getInt("time", 1)];
 
         count = sp.getInt("count", 0);
@@ -160,7 +161,7 @@ public class CallingLockService extends Service {
         } else {
             params.type = WindowManager.LayoutParams.TYPE_PRIORITY_PHONE;
         }
-//解决延时就挂断电话的bug
+        //解决延时就挂断电话的bug
         flag = true;
         new Thread() {
             public void run() {

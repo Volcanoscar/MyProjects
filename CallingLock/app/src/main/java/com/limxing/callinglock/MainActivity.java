@@ -3,29 +3,51 @@ package com.limxing.callinglock;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.limxing.callinglock.utils.ShareUtil;
+
 
 public class MainActivity extends ActionBarActivity {
-    private SharedPreferences sp;
     private boolean running;
     private TextView tv_time;
     private TextView tv_main_count;
     private String[] times;
+    private ImageView iv_menu;
+    private ListView main_start_drawer;
+    private DrawerLayout dl_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sp = getSharedPreferences("info", MODE_PRIVATE);
         times = getResources().getStringArray(R.array.lockset_item);
         tv_time = (TextView) findViewById(R.id.tv_time);
         tv_main_count = (TextView) findViewById(R.id.tv_main_count);
+        main_start_drawer= (ListView) findViewById(R.id.main_start_drawer);
+        iv_menu= (ImageView) findViewById(R.id.iv_menu);
+        dl_main= (DrawerLayout) findViewById(R.id.dl_main);
+        iv_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dl_main.openDrawer(Gravity.LEFT);
+            }
+        });
+
         //使用说明的点击事件
         findViewById(R.id.tv_main).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,12 +72,10 @@ public class MainActivity extends ActionBarActivity {
                 //更改锁定时间
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle(getResources().getString(R.string.timedelay));
-                builder.setSingleChoiceItems(times, sp.getInt("time", 1), new DialogInterface.OnClickListener() {
+                builder.setSingleChoiceItems(times, ShareUtil.getIntData(MainActivity.this, "time", 1), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putInt("time", which);
-                        editor.commit();
+                        ShareUtil.saveIntData(MainActivity.this, "time", which);
                         if (which == 4) {
                             tv_time.setText(getResources().getString(R.string.close));
                             if (running) {
@@ -75,11 +95,41 @@ public class MainActivity extends ActionBarActivity {
                 builder.show();
             }
         });
-        if (sp.getInt("time", 2) != 4) {
-            Intent intent = new Intent(MainActivity.this, CallingLockService.class);
-            startService(intent);
-        }
-        TextView tv_main_count = (TextView) findViewById(R.id.tv_main_count);
+        //给左侧菜单栏填充数据
+        main_start_drawer.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return 3;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return 0;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                TextView view = new TextView(MainActivity.this);
+                view.setText("欢迎使用" + position);
+                return view;
+            }
+        });
+        //给菜单栏上的条目设置点击事件
+        main_start_drawer.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                dl_main.closeDrawers();
+                Intent intent = new Intent(MainActivity.this,StatementActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -89,8 +139,8 @@ public class MainActivity extends ActionBarActivity {
         if (!running) {
             tv_time.setText(getResources().getString(R.string.close));
         }
-        tv_time.setText(times[sp.getInt("time", 1)]);
-        tv_main_count.setText(String.valueOf(getResources().getString(R.string.lanjie) + sp.getInt("count", 0)) + getResources().getString(R.string.time));
+        tv_time.setText(times[ShareUtil.getIntData(MainActivity.this, "time", 1)]);
+        tv_main_count.setText(String.valueOf(getResources().getString(R.string.lanjie) + ShareUtil.getIntData(MainActivity.this, "count", 0)) + getResources().getString(R.string.time));
         super.onStart();
     }
 

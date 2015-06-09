@@ -6,9 +6,9 @@
 
     <ImageView
         android:id="@+id/splash_iv"
-        android:layout_width="200dip"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
         android:src="@drawable/splash_horse_newyear" />
 
 </RelativeLayout>

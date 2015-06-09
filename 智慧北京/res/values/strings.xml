@@ -2,8 +2,6 @@
 <resources>
 
     <string name="app_name">智慧北京</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">dummy_content</string>
     <string name="tab_function">首页</string>

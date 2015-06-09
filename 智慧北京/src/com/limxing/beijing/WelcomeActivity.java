@@ -19,28 +19,30 @@ public class WelcomeActivity extends BaseActivity {
 
 	@Override
 	public void init() {
-		if (ShareUtil.getBooleanData(getApplicationContext(), "isfirst", true)) {
-			new Thread() {
-				public void run() {
-					try {
-						Thread.sleep(2000);
+
+		new Thread() {
+			public void run() {
+				try {
+					Thread.sleep(2000);
+					if (ShareUtil.getBooleanData(getApplicationContext(),
+							"isfirst", true)) {
 						intent = new Intent(WelcomeActivity.this,
 								GuideActivity.class);
 						startActivity(intent);
 						finish();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+					} else {
+						intent = new Intent(WelcomeActivity.this,
+								MainActivity.class);
+						startActivity(intent);
+						finish();
 					}
-
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			}.start();
 
-		} else {
-			intent = new Intent(WelcomeActivity.this, MainActivity.class);
-			startActivity(intent);
-			finish();
-		}
+			}
+		}.start();
 
 	}
 

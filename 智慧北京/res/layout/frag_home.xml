@@ -4,13 +4,12 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-
-	<View
+    <com.limxing.beijing.view.MyViewPager
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0" 
-        class="com.limxing.baijing.view.MyViewPager"/>
+        />
     
 
     <RadioGroup

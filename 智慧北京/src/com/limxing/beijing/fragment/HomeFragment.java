@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
@@ -22,9 +24,9 @@ import com.limxing.beijing.view.MyViewPager;
 
 public class HomeFragment extends BaseFragment {
 
-	// ��ͬ��findById(R.id.layout_content)
+	// 相当于findById(R.id.layout_content)
 	@ViewInject(R.id.layout_content)
-	private MyViewPager layout_content;// �Ѿ���ֵ����null
+	private MyViewPager viewPagerlayout_content;
 
 	@ViewInject(R.id.main_radio)
 	private RadioGroup main_radio;
@@ -33,9 +35,6 @@ public class HomeFragment extends BaseFragment {
 	@Override
 	public View initView(LayoutInflater inflater) {
 		view = inflater.inflate(R.layout.frag_home, null);
-		// layout_content = (MyViewPager)
-		// view.findViewById(R.id.layout_content);
-
 		ViewUtils.inject(this, view);
 		return view;
 
@@ -43,43 +42,65 @@ public class HomeFragment extends BaseFragment {
 
 	@Override
 	public void initData(Bundle savedInstanceState) {
-		main_radio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				switch (checkedId) {
-				case R.id.rb_function:
-
-					layout_content.setCurrentItem(0);
-
-					break;
-
-				case R.id.rb_news_center:
-					layout_content.setCurrentItem(1);
-
-					break;
-				case R.id.rb_smart_service:
-					layout_content.setCurrentItem(2);
-					break;
-				case R.id.rb_gov_affairs:
-					layout_content.setCurrentItem(3);
-					break;
-				case R.id.rb_setting:
-					layout_content.setCurrentItem(4);
-					break;
-				}
-
-			}
-		});
+		// 设置默认选中的导航首页
 		main_radio.check(R.id.rb_function);
+		// 把所有的导航页面对象添加到集合中
 		list = new ArrayList<BasePager>();
 		list.add(new FunctionPager(getActivity()));
 		list.add(new NewCenterPager(getActivity()));
 		list.add(new SmartServicePager(getActivity()));
 		list.add(new GovAffairsPager(getActivity()));
 		list.add(new SettingPager(getActivity()));
+		// 向frag_home中的MyViewPager中添加数据
+		viewPagerlayout_content.setAdapter(new MyAdapter());
+		viewPagerlayout_content
+				.setOnPageChangeListener(new OnPageChangeListener() {
 
-		layout_content.setAdapter(new MyAdapter());
+					@Override
+					public void onPageSelected(int position) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onPageScrolled(int position,
+							float positionOffset, int positionOffsetPixels) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int state) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+
+		main_radio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.rb_function:
+					viewPagerlayout_content.setCurrentItem(0);
+					break;
+				case R.id.rb_news_center:
+					viewPagerlayout_content.setCurrentItem(1);
+					break;
+				case R.id.rb_smart_service:
+					viewPagerlayout_content.setCurrentItem(2);
+					break;
+				case R.id.rb_gov_affairs:
+					viewPagerlayout_content.setCurrentItem(3);
+					break;
+				case R.id.rb_setting:
+					viewPagerlayout_content.setCurrentItem(4);
+					break;
+				}
+
+			}
+		});
+
 	}
 
 	class MyAdapter extends PagerAdapter {
@@ -96,13 +117,13 @@ public class HomeFragment extends BaseFragment {
 		}
 
 		@Override
-		public void destroyItem(View container, int position, Object object) {
+		public void destroyItem(ViewGroup container, int position, Object object) {
 			((MyViewPager) container).removeView((View) object);
 
 		}
 
 		@Override
-		public Object instantiateItem(View container, int position) {
+		public Object instantiateItem(ViewGroup container, int position) {
 			((MyViewPager) container).addView(list.get(position).getRootView());
 			return list.get(position).getRootView();
 		}

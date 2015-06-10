@@ -22,17 +22,18 @@ public class MyViewPager extends LazyViewPager {
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
+	
 		// 向下传递
 		return false;// android.widget.TextView@4053b850 这个在view的子类中
 
 		
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {// 直接return不管是true还是false 的话
-													// 都不能滑动
-		return false;
-	}
+//	@Override
+//	public boolean onTouchEvent(MotionEvent ev) {// 直接return不管是true还是false 的话
+//		return super.onTouchEvent(ev);				// 都不能滑动
+//		//return false;
+//	}
 	/**
 	 * onInterceptTouchEvent(ev)值为true时，子View的触摸事件就会被中断，
 	 * dispatchTouchEvent方法就返回了true。后续处理ViewGroup的touch事件

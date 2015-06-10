@@ -1,4 +1,5 @@
 package com.limxing.beijing.view;
+
 /*
  * Copyright (C) 2011 The Android Open Source Project
  *
@@ -14,9 +15,8 @@ package com.limxing.beijing.view;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
+
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -48,6 +48,11 @@ import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * Layout manager that allows the user to flip left and right
  * through pages of data.  You supply an implementation of a
@@ -64,7 +69,7 @@ public class LazyViewPager extends ViewGroup {
 
     private static final boolean USE_CACHE = false;
 
-    private static final int DEFAULT_OFFSCREEN_PAGES = 0;//通过算法分析，让当前viewpager不要去预加载
+    private static final int DEFAULT_OFFSCREEN_PAGES = 0;
     private static final int MAX_SETTLE_DURATION = 600;
 
     static class ItemInfo {

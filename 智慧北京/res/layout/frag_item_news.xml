@@ -8,14 +8,14 @@
         android:id="@+id/lv_item_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        class="com.limxing.beijing.view.pullrefreshview.PullToRefreshListView"
         android:cacheColorHint="@android:color/white"
         android:divider="@drawable/news_list_line"
         android:fadingEdge="none"
-        class="com.itheima37.zhbj_heima37.view.pullrefreshview.PullToRefreshListView" 
         android:scrollbars="none" />
 
-<!--     <include -->
-<!--         android:id="@+id/loading_view"  -->
-<!--         layout="@layout/layout_loading" /> -->
+    <!-- <include -->
+    <!-- android:id="@+id/loading_view" -->
+    <!-- layout="@layout/layout_loading" /> -->
 
 </FrameLayout>

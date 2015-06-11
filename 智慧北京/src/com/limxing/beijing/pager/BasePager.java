@@ -7,28 +7,28 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
-import com.lidroid.xutils.http.client.multipart.HttpMultipartMode;
 import com.limxing.beijing.MainActivity;
 import com.limxing.beijing.R;
 
 public abstract class BasePager {
 	public Context context;
 	public View view;
-	private TextView txt_title;
-	private ImageButton imgbtn_text;
-	private ImageButton imgbtn_right;
-	private ImageButton btn_right;
+	public TextView txt_title;
+	public ImageButton imgbtn_text;
+	public ImageButton imgbtn_right;
+	public ImageButton btn_right;
+	public SlidingMenu slidingMenu;
 
 	public BasePager(Context context) {
 		this.context = context;
-
+		slidingMenu = ((MainActivity) context).getSlidingMenu();
 		view = initView();
-		initData();
-
 	}
 
 	public View getRootView() {

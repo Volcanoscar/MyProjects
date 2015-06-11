@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v4.view.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import com.limxing.beijing.pager.GovAffairsPager;
 import com.limxing.beijing.pager.NewCenterPager;
 import com.limxing.beijing.pager.SettingPager;
 import com.limxing.beijing.pager.SmartServicePager;
+import com.limxing.beijing.view.LazyViewPager;
+import com.limxing.beijing.view.LazyViewPager.OnPageChangeListener;
 import com.limxing.beijing.view.MyViewPager;
 
 public class HomeFragment extends BaseFragment {
@@ -29,7 +32,7 @@ public class HomeFragment extends BaseFragment {
 	private MyViewPager viewPagerlayout_content;
 
 	@ViewInject(R.id.main_radio)
-	private RadioGroup main_radio;
+	private RadioGroup radio_group;
 	protected ArrayList<BasePager> list;
 
 	@Override
@@ -43,7 +46,7 @@ public class HomeFragment extends BaseFragment {
 	@Override
 	public void initData(Bundle savedInstanceState) {
 		// 设置默认选中的导航首页
-		main_radio.check(R.id.rb_function);
+		radio_group.check(R.id.rb_function);
 		// 把所有的导航页面对象添加到集合中
 		list = new ArrayList<BasePager>();
 		list.add(new FunctionPager(getActivity()));
@@ -58,7 +61,9 @@ public class HomeFragment extends BaseFragment {
 
 					@Override
 					public void onPageSelected(int position) {
-						// TODO Auto-generated method stub
+						// 切换了按钮
+						BasePager basePager = list.get(position);
+						basePager.initData();
 
 					}
 
@@ -76,7 +81,7 @@ public class HomeFragment extends BaseFragment {
 					}
 				});
 
-		main_radio.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		radio_group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -100,6 +105,9 @@ public class HomeFragment extends BaseFragment {
 
 			}
 		});
+		// 初始化是选定第一个group
+		BasePager basePager = list.get(0);
+		basePager.initData();
 
 	}
 
@@ -119,7 +127,6 @@ public class HomeFragment extends BaseFragment {
 		@Override
 		public void destroyItem(ViewGroup container, int position, Object object) {
 			((MyViewPager) container).removeView((View) object);
-
 		}
 
 		@Override
@@ -128,6 +135,11 @@ public class HomeFragment extends BaseFragment {
 			return list.get(position).getRootView();
 		}
 
+	}
+
+	// 被菜单上的条目调用的方法
+	public NewCenterPager switchNewCenterPager() {
+		return (NewCenterPager) list.get(1);
 	}
 
 }

@@ -13,7 +13,7 @@
         android:orientation="horizontal" >
 		
         <!-- 当前控件可用去指定底部viewpager的显示,一一对应(1,1) -->
-        <com.itheima37.zhbj_heima37.view.pagerindicator.TabPageIndicator
+        <com.limxing.beijing.view.pagerindicator.TabPageIndicator
             android:id="@+id/indicator"
             style="@style/Theme.PageIndicatorDefaults"
             android:layout_width="0dp"

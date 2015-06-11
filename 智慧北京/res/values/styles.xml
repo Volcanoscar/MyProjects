@@ -16,6 +16,8 @@
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <item name="android:windowNoTitle">true</item>
+        <item name="vpiIconPageIndicatorStyle">@style/Widget.IconPageIndicator</item>
+        <item name="vpiTabPageIndicatorStyle">@style/Widget.TabPageIndicator</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 

@@ -25,15 +25,31 @@ public class MainActivity extends SlidingFragmentActivity {
 		slidingMenu.setMode(SlidingMenu.LEFT);
 		slidingMenu.setShadowDrawable(R.drawable.shadow);
 		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
-		
-		MenuFragment fragment = new MenuFragment();
-		getSupportFragmentManager().beginTransaction().replace(
-				R.id.menu, fragment, "MENU").commit();
-		
-		HomeFragment homeFragment = new HomeFragment();
-		getSupportFragmentManager().beginTransaction().replace(
-				R.id.content_frame, homeFragment, "HOME").commit();
 
+		MenuFragment fragment = new MenuFragment();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.menu, fragment, "MENU").commit();
+
+		HomeFragment homeFragment = new HomeFragment();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.content_frame, homeFragment, "HOME").commit();
+
+	}
+
+	/**
+	 * 被调用，获取MainActivity下的Fragment对象
+	 * 
+	 * @return
+	 */
+	public MenuFragment switchMenuFragment() {
+		return (MenuFragment) getSupportFragmentManager().findFragmentByTag(
+				"MENU");
+	}
+
+	// 被菜单上的条目调用 获取HomeFragment
+	public HomeFragment switchHomeFragment() {
+		return (HomeFragment) getSupportFragmentManager().findFragmentByTag(
+				"HOME");
 	}
 
 }

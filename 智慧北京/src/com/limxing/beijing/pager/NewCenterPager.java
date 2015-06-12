@@ -82,7 +82,6 @@ public class NewCenterPager extends BasePager {
 	private void processData(String result) {
 		// 解析数据
 		NewCenter newCenter = GsonUtil.jsonToBean(result, NewCenter.class);
-		LogUtils.i(newCenter.data.size() + "");
 		titleList = new ArrayList<String>();
 		// 循环遍历对象中，侧滑菜单中的条目标题放进集合中
 		for (int i = 0; i < newCenter.data.size(); i++) {

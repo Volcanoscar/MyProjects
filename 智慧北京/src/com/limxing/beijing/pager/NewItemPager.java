@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -34,16 +35,16 @@ public class NewItemPager extends BasePager {
 	private String url;
 	private View layout_roll_view;
 	// 轮播图片的位置
-	@ViewInject(R.id.top_news_viewpager)
+	// @ViewInject(R.id.top_news_viewpager)
 	public LinearLayout top_news_viewpager;
 	// 轮播图的标题
-	@ViewInject(R.id.top_news_title)
+	// @ViewInject(R.id.top_news_title)
 	public TextView top_news_title;
 	// 轮播图放置红点的位置
-	@ViewInject(R.id.dots_ll)
+	// @ViewInject(R.id.dots_ll)
 	public LinearLayout dots_ll;
 
-	@ViewInject(R.id.lv_item_news)
+	// @ViewInject(R.id.lv_item_news)
 	public PullToRefreshListView lv_item_news;
 	// 图片关联的标题
 	private List<String> titleList = new ArrayList<String>();
@@ -63,12 +64,19 @@ public class NewItemPager extends BasePager {
 		// 获取轮播图的布局
 		layout_roll_view = View.inflate(context, R.layout.layout_roll_view,
 				null);
-		// dots_ll=(LinearLayout) layout_roll_view.findViewById(R.id.dots_ll);
-		// top_news_viewpager=(LinearLayout) layout_roll_view.findViewById(R.id.top_news_viewpager);
-		ViewUtils.inject(context, layout_roll_view);
+		
+		top_news_viewpager = (LinearLayout) layout_roll_view
+				.findViewById(R.id.top_news_viewpager);
+		dots_ll = (LinearLayout) layout_roll_view.findViewById(R.id.dots_ll);
+		// ViewUtils.inject(context, layout_roll_view);
 		// 获取正文的布局，这是个自定义的ListView然后把上面的轮播图放进去
 		view = View.inflate(context, R.layout.frag_item_news, null);
-		ViewUtils.inject(context, view);
+		lv_item_news = (PullToRefreshListView) view
+				.findViewById(R.id.lv_item_news);
+		// ViewUtils.inject(context, view);
+
+		// 操作自定义的控件屏蔽下拉加载的错误
+
 		return view;
 	}
 
@@ -80,7 +88,6 @@ public class NewItemPager extends BasePager {
 		if (!TextUtils.isEmpty(result)) {
 			// 解析本地数据展示在页面上
 			processData(result);
-			return;
 		}
 		// 联网下载到本地，并解析数据展现在页面上
 		getNewItemPager();
@@ -140,7 +147,7 @@ public class NewItemPager extends BasePager {
 			// 需要添加到listView上面去
 			// -----------------------不知道什么意思
 			if (lv_item_news.getRefreshableView().getHeaderViewsCount() < 1) {
-				lv_item_news.getRefreshableView().addHeaderView(lv_item_news);
+				lv_item_news.getRefreshableView().addHeaderView(layout_roll_view);
 			}
 		}
 		// 填充ListView后 头部轮播图才会显示
@@ -166,13 +173,21 @@ public class NewItemPager extends BasePager {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = View.inflate(context, R.layout.layout_news_item, null);
-			ImageView iv_img = (ImageView) view.findViewById(R.id.iv_img);
-			TextView tv_title = (TextView) view.findViewById(R.id.tv_title);
-			TextView tv_pub_date = (TextView) view
+			if(convertView==null){
+				convertView=View.inflate(context, R.layout.layout_news_item, null);
+			}
+			BitmapUtils bitmapUtils=new BitmapUtils(context);
+			ImageView iv_img = (ImageView) convertView.findViewById(R.id.iv_img);
+			TextView tv_title = (TextView) convertView.findViewById(R.id.tv_title);
+			TextView tv_pub_date = (TextView) convertView
 					.findViewById(R.id.tv_pub_date);
-
-			return view;
+			bitmapUtils.display(iv_img, list.get(position).listimage);
+			tv_title.setText(list.get(position).title);
+			tv_pub_date.setText(list.get(position).pubdata);
+			
+			
+			
+			return convertView;
 		}
 
 	}

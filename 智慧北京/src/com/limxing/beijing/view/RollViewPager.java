@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lidroid.xutils.BitmapUtils;
 import com.limxing.beijing.R;
+import com.limxing.beijing.utils.BeiJingApi;
 
 import android.content.Context;
 import android.os.Handler;
@@ -133,7 +134,7 @@ public class RollViewPager extends ViewPager {
 			View view = View.inflate(context, R.layout.viewpager_item, null);
 			// 把图片放进布局控件中
 			ImageView imageView = (ImageView) view.findViewById(R.id.image);
-			bitmapUtils.display(imageView, urlImageList.get(position));
+			bitmapUtils.display(imageView, BeiJingApi.BASE_URL+urlImageList.get(position));
 			((RollViewPager) container).addView(view);
 			return view;
 		}

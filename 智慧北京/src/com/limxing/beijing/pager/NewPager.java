@@ -81,6 +81,7 @@ public class NewPager extends BasePager {
 
 			@Override
 			public void onPageSelected(int arg0) {
+				
 				// 在此设置只有在第一页的时候才能拖动左侧菜单栏
 				if (arg0 == 0) {
 					slidingMenu
@@ -122,7 +123,7 @@ public class NewPager extends BasePager {
 		@Override
 		public boolean isViewFromObject(View arg0, Object arg1) {
 			// TODO Auto-generated method stub
-			return false;
+			return arg0==arg1;
 		}
 
 		// 消除前一个页面

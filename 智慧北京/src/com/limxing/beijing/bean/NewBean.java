@@ -22,11 +22,13 @@ public class NewBean {
 		//
 		public String listimage;
 		//
-		public String pubdata;
+		public String pubdate;
 		//
 		public String title;
 		public String type;
 		public String url;
+		public boolean isRead;
+		public String id;
 	}
 
 	public class Topic{

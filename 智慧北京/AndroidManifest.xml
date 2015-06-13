@@ -25,6 +25,7 @@
         </activity>
         <activity android:name="com.limxing.beijing.GuideActivity"></activity>
         <activity android:name="com.limxing.beijing.MainActivity"></activity>
+        <activity android:name="com.limxing.beijing.activity.NewsActivity"></activity>
     </application>
 
 </manifest>
